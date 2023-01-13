@@ -12,7 +12,6 @@ import java.util.List;
  * @author Jack Meng
  */
 public class stl_FPS extends Thread {
-    private long last;
     private double fps, min = 3000000000.0d, max = 0.0d;
     private final List<Runnable> listeners = new ArrayList<>();
 
@@ -27,7 +26,7 @@ public class stl_FPS extends Thread {
     @Override
     public void run() {
         while (true) {
-            last = System.nanoTime();
+            long last = System.nanoTime();
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {

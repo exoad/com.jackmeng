@@ -13,7 +13,8 @@ public final class UInt_t
         extends
         Number
         implements
-        stl_type.type_Numerical<UInt_t> {
+        stl_type.type_Numerical<UInt_t>
+{
 
     private final int val;
 

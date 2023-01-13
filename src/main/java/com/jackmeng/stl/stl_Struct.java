@@ -23,18 +23,18 @@ public final class stl_Struct
 
         @Override public boolean equals(Object cum)
         {
-            if (!(cum instanceof struct_Pair< ?, ? > makePair))
+            if (!(cum instanceof struct_Pair< ?, ? >))
                 return false;
-            return makePair.first.equals(first) && makePair.second.equals(second);
+            return ((struct_Pair< ?, ? >)cum).first.equals(first) && ((struct_Pair< ?, ? >)cum).second.equals(second);
         }
 
         @Override public int hashCode()
         {
-            return (((((1 << (Integer.BYTES * 8) + 1) - 1) & first.hashCode())
+            return (((((1 << 1) - 1) & first.hashCode())
                     ^ ((((1 << (Integer.BYTES * 8) + 1) - 1) & first.hashCode()) >> ((Integer.BYTES * 8) / 2))) << ((Integer.BYTES
                     * 8) / 2))
 
-                    | ((((1 << (Integer.BYTES * 8) + 1) - 1) & second.hashCode())
+                    | ((((1 << 1) - 1) & second.hashCode())
                     ^ ((((1 << (Integer.BYTES * 8) + 1) - 1) & second.hashCode()) >> ((Integer.BYTES * 8) / 2)));
         }
     }
