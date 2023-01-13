@@ -20,7 +20,8 @@ public class stl_PIDController
     private int onTargetCount;
     private int onTargetCountMax;
 
-    stl_PIDController(double P, double I, double D) {
+    public stl_PIDController(double P, double I, double D) 
+    {
         this.P = P;
         this.I = I;
         this.D = D;
@@ -39,48 +40,57 @@ public class stl_PIDController
         onTargetCountMax = 10;
     }
 
-    void setSetpoint(double setpoint) {
+    public void setSetpoint(double setpoint) 
+    {
         this.setpoint = setpoint;
     }
 
-    void setMaxErrorSum(double maxErrorSum) {
+    public void setMaxErrorSum(double maxErrorSum) 
+    {
         this.maxErrorSum = maxErrorSum;
     }
 
-    void setMaxOutput(double maxOutput) {
+    public void setMaxOutput(double maxOutput) 
+    {
         this.maxOutput = maxOutput;
     }
 
-    void setMinOutput(double minOutput) {
+    public void setMinOutput(double minOutput) 
+    {
         this.minOutput = minOutput;
     }
 
-    void setDt(double dt) {
+    public void setDt(double dt) 
+    {
         this.dt = dt;
     }
 
-    void setDeadband(double deadband) {
+    public void setDeadband(double deadband) 
+    {
         this.deadband = deadband;
     }
 
-    void setOnTargetError(double onTargetError) {
+    public void setOnTargetError(double onTargetError) 
+    {
         this.onTargetError = onTargetError;
     }
 
-    void setOnTargetCountMax(int onTargetCountMax) {
+    public void setOnTargetCountMax(int onTargetCountMax) 
+    {
         this.onTargetCountMax = onTargetCountMax;
     }
 
-    double calculate(double processVariable) {
+    public double calculate(double processVariable) 
+    {
         double time = System.nanoTime();
-        if (firstRun) {
+        if (firstRun) 
+        {
             dt = (time - lastTime) / 1e9;
             firstRun = false;
         }
         double error = setpoint - processVariable;
-        if (Math.abs(error) < deadband) {
+        if (Math.abs(error) < deadband)
             error = 0;
-        }
         errorSum += error * dt;
         errorSum = Math.min(errorSum, maxErrorSum);
         double dError = (error - lastError) / dt;
@@ -92,23 +102,28 @@ public class stl_PIDController
         return output;
     }
 
-    private void checkOnTarget(double error) {
-        if (Math.abs(error) < onTargetError) {
+    private void checkOnTarget(double error) 
+    {
+        if (Math.abs(error) < onTargetError) 
+        {
             onTargetCount++;
-            if (onTargetCount >= onTargetCountMax) {
+            if (onTargetCount >= onTargetCountMax)
                 isOnTarget = true;
-            }
-        } else {
+        } 
+        else 
+        {
             isOnTarget = false;
             onTargetCount = 0;
         }
     }
 
-    public boolean isOnTarget() {
+    public boolean isOnTarget() 
+    {
         return isOnTarget;
     }
 
-    public void reset() {
+    public void reset() 
+    {
         errorSum = 0;
         lastError = 0;
         isOnTarget = false;
