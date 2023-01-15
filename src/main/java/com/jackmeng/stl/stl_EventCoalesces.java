@@ -4,7 +4,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class stl_EventCoalesces
-    implements
+        implements
         Runnable
 {
     private Timer timer;

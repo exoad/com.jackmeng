@@ -59,10 +59,9 @@ public class stl_Complex
 
     public stl_Complex times(stl_Complex stl_complex)
     {
-        return new stl_Complex (
+        return new stl_Complex(
                 this.real() * stl_complex.real() - this.imaginary() * stl_complex.imaginary(),
-                this.real() * this.imaginary() - stl_complex.real() * stl_complex.imaginary()
-        );
+                this.real() * this.imaginary() - stl_complex.real() * stl_complex.imaginary());
     }
 
     public stl_Complex divides(stl_Complex stl_complex)
@@ -87,7 +86,8 @@ public class stl_Complex
 
     public stl_Complex recp()
     {
-        return new stl_Complex(real / (real * real + imaginary * imaginary), imaginary / (real * real + imaginary * imaginary));
+        return new stl_Complex(real / (real * real + imaginary * imaginary),
+                imaginary / (real * real + imaginary * imaginary));
     }
 
     public stl_Complex scale(double k)

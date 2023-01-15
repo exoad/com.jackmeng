@@ -9,27 +9,31 @@ package com.jackmeng.stl;
  *
  * @author Jack Meng
  */
-public interface stl_type<T>
+public interface stl_type< T >
         extends
-        Comparable<T> {
+        Comparable< T >
+{
 
     /**
      * Defaulted for the name of the type!!!
      *
      * @return The name of the type.
      */
-    default String name_type() {
+    default String name_type()
+    {
         return this.getClass().getCanonicalName() + "->" + getClass().getTypeName();
     }
 
-    interface type_Numerical<E extends Number>
-            extends stl_type<E> {
+    interface type_Numerical< E extends Number >
+            extends stl_type< E >
+    {
 
         /**
          * Generic Numerical Addition.
          * Where it is "this + (param.value)"
          *
-         * @param e The other type to be added.
+         * @param e
+         *            The other type to be added.
          * @return A new object instance that has the value of the final operation.
          */
         E plus(E e);
@@ -38,7 +42,8 @@ public interface stl_type<T>
          * Generic Numerical Subtraction.
          * Where it is "this - (param.value)"
          *
-         * @param e The other type to be subtracted.
+         * @param e
+         *            The other type to be subtracted.
          * @return A new object instance that has the value of the final operation.
          */
         E minus(E e);
@@ -47,7 +52,8 @@ public interface stl_type<T>
          * Generic Numerical Multiplication.
          * Where it is "this * (param.value)"
          *
-         * @param e The other type to be multiplied by.
+         * @param e
+         *            The other type to be multiplied by.
          * @return A new object instance that has the value of the final operation.
          */
         E times(E e);
@@ -56,7 +62,8 @@ public interface stl_type<T>
          * Generic Numerical Division.
          * Where it is "this / (param.value)"
          *
-         * @param e The other type to be divided by.
+         * @param e
+         *            The other type to be divided by.
          * @return A new object instance that has the value of the final operation.
          */
         E divide(E e);
@@ -65,7 +72,8 @@ public interface stl_type<T>
          * Generic Numerical Modulo (Remainder Division).
          * Where it is "this % (param.value)"
          *
-         * @param e The other type to be modded.
+         * @param e
+         *            The other type to be modded.
          * @return A new object instance that has the value of the final operation.
          */
         E mod(E e);
@@ -82,7 +90,8 @@ public interface stl_type<T>
          * Generic Bitwise OR.
          * Where it is "this | (param.value)"
          *
-         * @param e The other type to be bitwise ORed.
+         * @param e
+         *            The other type to be bitwise ORed.
          * @return A new object instance that has the value of the final operation.
          */
         E or(E e);
@@ -91,7 +100,8 @@ public interface stl_type<T>
          * Generic Bitwise XOR.
          * Where it is "this ^ (param.value)"
          *
-         * @param e The other type to be bitwise XORed.
+         * @param e
+         *            The other type to be bitwise XORed.
          * @return A new object instance that has the value of the final operation.
          */
         E xor(E e);
@@ -100,7 +110,8 @@ public interface stl_type<T>
          * Generic Bitwise AND.
          * Where it is "this & (param.value)"
          *
-         * @param e The other type to be bitwise ANDed.
+         * @param e
+         *            The other type to be bitwise ANDed.
          * @return A new object instance that has the value of the final operation.
          */
         E and(E e);
@@ -109,7 +120,8 @@ public interface stl_type<T>
          * Generic Bitwise Left Shift.
          * Where it is "this << (param.value)"
          *
-         * @param e The other type to left shift by.
+         * @param e
+         *            The other type to left shift by.
          * @return A new object instance that has the value of the final operation.
          */
         E left(E e);
@@ -118,7 +130,8 @@ public interface stl_type<T>
          * Generic Bitwise Right Shift.
          * Where it is "this >> (param.value)"
          *
-         * @param e The other type to right shift by.
+         * @param e
+         *            The other type to right shift by.
          * @return A new object instance that has the value of the final operation.
          */
         E right(E e);
@@ -129,7 +142,8 @@ public interface stl_type<T>
          *
          * Discarding bits and fill from the left with zeroes.
          *
-         * @param e The other type to right shift by.
+         * @param e
+         *            The other type to right shift by.
          * @return A new object instance that has the value of the final operation.
          */
         E right_2(E e);

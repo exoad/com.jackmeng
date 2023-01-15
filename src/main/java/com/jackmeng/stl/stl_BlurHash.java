@@ -126,13 +126,13 @@ public final class stl_BlurHash
          * Encodes with Base 83.
          *
          * @param val
-         *          The value to encode
+         *            The value to encode
          * @param length
-         *          The length of the value
+         *            The length of the value
          * @param buff
-         *          The buffer to write to (contains values)
+         *            The buffer to write to (contains values)
          * @param offset
-         *          The offset to start writing at
+         *            The offset to start writing at
          */
         public static void encode(long val, int length, char[] buff, int offset)
         {
@@ -163,8 +163,10 @@ public final class stl_BlurHash
         public static long encodeAC(double[] val, double m)
         {
             return Math
-                    .round((Math.floor(Math.max(0, Math.min(18, Math.floor(signpow(val[0] / m, 0.5) * 9 + 9.5))))) * 19 * 19
-                            + (Math.floor(Math.max(0, Math.min(18, Math.floor(signpow(val[1] / m, 0.5) * 9 + 9.5))))) * 19
+                    .round((Math.floor(Math.max(0, Math.min(18, Math.floor(signpow(val[0] / m, 0.5) * 9 + 9.5))))) * 19
+                            * 19
+                            + (Math.floor(Math.max(0, Math.min(18, Math.floor(signpow(val[1] / m, 0.5) * 9 + 9.5)))))
+                                    * 19
                             + (Math.floor(Math.max(0, Math.min(18, Math.floor(signpow(val[2] / m, 0.5) * 9 + 9.5))))));
         }
 
@@ -172,7 +174,7 @@ public final class stl_BlurHash
          * Decodes from Base 83
          *
          * @param str
-         *          An Encoded String
+         *            An Encoded String
          * @return The decoded string from base 83
          */
         public static int decode(String str)
@@ -249,7 +251,7 @@ public final class stl_BlurHash
      * Finds a max value in an array (2D)
      *
      * @param val
-     *          The array
+     *            The array
      * @return A max value
      */
     public static double max(double[][] val)
@@ -266,7 +268,7 @@ public final class stl_BlurHash
      * Converts the given number to be within the linear range
      *
      * @param val
-     *          The number to convert
+     *            The number to convert
      * @return The converted number
      */
     public static double to_linear(int val)
@@ -278,7 +280,7 @@ public final class stl_BlurHash
      * Converts the given number to be within the sRGB range
      *
      * @param val
-     *          The number to convert
+     *            The number to convert
      * @return The converted number
      */
     public static int _as_linear(double val)
@@ -293,15 +295,15 @@ public final class stl_BlurHash
      * Encodes the given values into a BlurHash
      *
      * @param pixels
-     *          The pixels to encode
+     *            The pixels to encode
      * @param width
-     *          The width of the image
+     *            The width of the image
      * @param height
-     *          The height of the image
+     *            The height of the image
      * @param componentX
-     *          The x-component of the center of the image
+     *            The x-component of the center of the image
      * @param componentY
-     *          The y-component of the center of the image
+     *            The y-component of the center of the image
      * @return The encoded BlurHash as a String
      */
     public static String enc(int[] pixels, int width, int height, int componentX, int componentY)
@@ -367,14 +369,14 @@ public final class stl_BlurHash
      * Decodes the given BlurHash into an array of pixels
      *
      * @param blurHash
-     *          The BlurHash to decode (String)
+     *            The BlurHash to decode (String)
      * @param width
-     *          The width of the image
+     *            The width of the image
      * @param height
-     *          The height of the image
+     *            The height of the image
      * @param punch
-     *          The punch value of the image; often regarded as the
-     *          "sharpness" of the image
+     *            The punch value of the image; often regarded as the
+     *            "sharpness" of the image
      * @return The decoded pixels
      */
     public static int[] dec(String blurHash, int width, int height, double punch)

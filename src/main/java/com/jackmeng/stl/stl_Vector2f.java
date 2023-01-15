@@ -68,7 +68,8 @@ public class stl_Vector2f
 
     public stl_Vector2f rot0(float theta)
     {
-        return new stl_Vector2f((float) (x * Math.cos(theta) - y * Math.sin(theta)), (float) (x * Math.sin(theta) + y * Math.cos(theta)));
+        return new stl_Vector2f((float) (x * Math.cos(theta) - y * Math.sin(theta)),
+                (float) (x * Math.sin(theta) + y * Math.cos(theta)));
     }
 
     public void rot1(float theta)
