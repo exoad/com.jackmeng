@@ -20,11 +20,7 @@ public class stl_PIDController
     private int onTargetCount;
     private int onTargetCountMax;
 
-<<<<<<< HEAD
-    public stl_PIDController(double P, double I, double D) 
-=======
-    stl_PIDController(double P, double I, double D)
->>>>>>> 0b00d40 (`add`)
+    public stl_PIDController(double P, double I, double D)
     {
         this.P = P;
         this.I = I;
@@ -44,99 +40,62 @@ public class stl_PIDController
         onTargetCountMax = 10;
     }
 
-<<<<<<< HEAD
-    public void setSetpoint(double setpoint) 
-=======
-    void setSetpoint(double setpoint)
->>>>>>> 0b00d40 (`add`)
+    public void setSetpoint(double setpoint)
     {
         this.setpoint = setpoint;
     }
 
-<<<<<<< HEAD
-    public void setMaxErrorSum(double maxErrorSum) 
-=======
-    void setMaxErrorSum(double maxErrorSum)
->>>>>>> 0b00d40 (`add`)
+    public void setMaxErrorSum(double maxErrorSum)
+
     {
         this.maxErrorSum = maxErrorSum;
     }
 
-<<<<<<< HEAD
-    public void setMaxOutput(double maxOutput) 
-=======
-    void setMaxOutput(double maxOutput)
->>>>>>> 0b00d40 (`add`)
+    public void setMaxOutput(double maxOutput)
+
     {
         this.maxOutput = maxOutput;
     }
 
-<<<<<<< HEAD
-    public void setMinOutput(double minOutput) 
-=======
-    void setMinOutput(double minOutput)
->>>>>>> 0b00d40 (`add`)
+    public void setMinOutput(double minOutput)
+
     {
         this.minOutput = minOutput;
     }
 
-<<<<<<< HEAD
-    public void setDt(double dt) 
-=======
-    void setDt(double dt)
->>>>>>> 0b00d40 (`add`)
+    public void setDt(double dt)
     {
         this.dt = dt;
     }
 
-<<<<<<< HEAD
-    public void setDeadband(double deadband) 
-=======
-    void setDeadband(double deadband)
->>>>>>> 0b00d40 (`add`)
+    public void setDeadband(double deadband)
+
     {
         this.deadband = deadband;
     }
 
-<<<<<<< HEAD
-    public void setOnTargetError(double onTargetError) 
-=======
-    void setOnTargetError(double onTargetError)
->>>>>>> 0b00d40 (`add`)
+    public void setOnTargetError(double onTargetError)
+
     {
         this.onTargetError = onTargetError;
     }
 
-<<<<<<< HEAD
-    public void setOnTargetCountMax(int onTargetCountMax) 
-=======
-    void setOnTargetCountMax(int onTargetCountMax)
->>>>>>> 0b00d40 (`add`)
+    public void setOnTargetCountMax(int onTargetCountMax)
+
     {
         this.onTargetCountMax = onTargetCountMax;
     }
 
-<<<<<<< HEAD
-    public double calculate(double processVariable) 
-    {
-        double time = System.nanoTime();
-        if (firstRun) 
-=======
-    double calculate(double processVariable)
+    public double calculate(double processVariable)
     {
         double time = System.nanoTime();
         if (firstRun)
->>>>>>> 0b00d40 (`add`)
         {
             dt = (time - lastTime) / 1e9;
             firstRun = false;
         }
         double error = setpoint - processVariable;
         if (Math.abs(error) < deadband)
-<<<<<<< HEAD
-=======
-        {
->>>>>>> 0b00d40 (`add`)
             error = 0;
         errorSum += error * dt;
         errorSum = Math.min(errorSum, maxErrorSum);
@@ -149,49 +108,27 @@ public class stl_PIDController
         return output;
     }
 
-<<<<<<< HEAD
-    private void checkOnTarget(double error) 
-    {
-        if (Math.abs(error) < onTargetError) 
-        {
-            onTargetCount++;
-            if (onTargetCount >= onTargetCountMax)
-                isOnTarget = true;
-        } 
-        else 
-=======
     private void checkOnTarget(double error)
     {
         if (Math.abs(error) < onTargetError)
         {
             onTargetCount++;
             if (onTargetCount >= onTargetCountMax)
-            {
                 isOnTarget = true;
-            }
         }
         else
->>>>>>> 0b00d40 (`add`)
         {
             isOnTarget = false;
             onTargetCount = 0;
         }
     }
 
-<<<<<<< HEAD
-    public boolean isOnTarget() 
-=======
     public boolean isOnTarget()
->>>>>>> 0b00d40 (`add`)
     {
         return isOnTarget;
     }
 
-<<<<<<< HEAD
-    public void reset() 
-=======
     public void reset()
->>>>>>> 0b00d40 (`add`)
     {
         errorSum = 0;
         lastError = 0;
