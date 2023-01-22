@@ -69,7 +69,6 @@ public class stl_PIDController
     }
 
     public void setDeadband(double deadband)
-
     {
         this.deadband = deadband;
     }

@@ -1,0 +1,148 @@
+package com.jackmeng.stl;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
+
+/**
+ * @author Jack Meng
+ */
+public class stl_Logger
+    implements
+        Runnable
+{
+    private final long try_save_ms_periodic;
+    private final String saveLocation, name;
+    private final File file;
+    private final Stack<String> logs = new Stack<>();
+    private boolean running = false, enabled = true;
+    private final AtomicBoolean saving = new AtomicBoolean(false);
+    private final List<Runnable> afterRoutine;
+    private long COLLECTED = 0L;
+    private final AtomicLong CYCLE = new AtomicLong(0L);
+    private int log_char_per_line = 70;
+
+    public stl_Logger(String loggerName, String saveLocationFolder, long save_time)
+    {
+        this.try_save_ms_periodic = save_time;
+        this.name = loggerName;
+        this.saveLocation = saveLocationFolder;
+        this.file = new File(saveLocationFolder + stl0.dirm() + loggerName + "_" + stl_Chrono.format_millis() + ".log");
+        afterRoutine = new ArrayList<>(10);
+    }
+
+    public void enable(boolean e)
+    {
+        this.enabled = e;
+    }
+
+    public boolean enabled()
+    {
+        return this.enabled;
+    }
+
+    public void char_per_line(int i)
+    {
+        this.log_char_per_line = i;
+    }
+
+    public int char_per_line()
+    {
+        return log_char_per_line;
+    }
+
+    public stl_Logger(String loggerName, String saveLocation)
+    {
+        this(loggerName, saveLocation, 4000L);
+    }
+
+    public synchronized void push(Object contents)
+    {
+        String placeholder = "{" + String.format("%08d", COLLECTED + 1) + " | " + String.format("%08d", CYCLE.get()) + "}   |   [" + stl_Chrono.format_millis("HH:mm:ss MM_dd_YYYY") + "]    >    ";
+        if(saving.get())
+            afterRoutine.add(() -> logs.push(placeholder + stl_Str.insert_nl(contents.toString(), char_per_line(), "\n" + stl_Str.n_copies(placeholder.length() - 5, " ")  + "|    ")));
+        else
+            logs.push(placeholder + stl_Str.insert_nl(contents.toString(), char_per_line(), "\n" + stl_Str.n_copies(placeholder.length() - 5, " ") + "|    "));
+        COLLECTED++;
+    }
+
+    public synchronized void log(Object ... contents)
+    {
+        for(Object e : contents) push(e);
+    }
+
+    public synchronized void kill()
+    {
+        afterRoutine.clear();
+        logs.clear();
+        stl0.STL_TIMER0.cancel();
+        Thread.currentThread().interrupt();
+    }
+
+    public String name()
+    {
+        return name;
+    }
+
+    public String saveLocation()
+    {
+        return saveLocation;
+    }
+
+    @Override
+    public synchronized void run()
+    {
+        if(!running && enabled)
+        {
+            if(file.exists())
+                file.delete();
+            try
+            {
+                file.createNewFile();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            stl0.STL_TIMER0.schedule(new TimerTask()
+            {
+                @Override
+                public void run()
+                {
+                    if(enabled)
+                    {
+                        if(logs.size() > 0)
+                        {
+                            saving.set(true);
+                            synchronized (logs) {
+                                StringBuilder sb = new StringBuilder();
+                                logs.forEach(x -> sb.append(x).append("\n"));
+
+                                try {
+                                    Files.write(file.toPath(), sb.toString().getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                logs.clear();
+                                if (afterRoutine.size() > 0)
+                                    for(int i = 0; i < afterRoutine.size(); i++)
+                                        afterRoutine.remove(i).run();
+                            }
+                            saving.set(false);
+                            CYCLE.set(CYCLE.get() + 1L);
+                        }
+                    }
+                }
+            }, 500L, try_save_ms_periodic);
+            running = true;
+        }
+    }
+}

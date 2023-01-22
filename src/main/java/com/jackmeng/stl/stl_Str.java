@@ -8,6 +8,14 @@ public final class stl_Str
     {
     }
 
+    public static String n_copies(int n, String sequence)
+    {
+        StringBuilder sb = new StringBuilder();
+        while(n-- > 0)
+            sb.append(sequence);
+        return sb.toString();
+    }
+
     public static boolean is_empty(CharSequence e)
     {
         return e == null || e.length() == 0 || e.isEmpty() || (e instanceof String && ((String) e).isBlank() || ((String)e).matches("\\s+"));
@@ -48,5 +56,37 @@ public final class stl_Str
         for (String[] a : payloads)
             template = template.replace(keyStart + a[0] + keyEnd, a[1]);
         return template;
+    }
+
+    public static String insert_nl(String input, int maxChars, String optionalPad)
+    {
+        String pad = optionalPad == null ? "\n" : optionalPad;
+        StringBuilder sb = new StringBuilder();
+        String[] w = input.split(" ");
+        int i = 0;
+        for(String r : w)
+        {
+            if(i + r.length() > maxChars)
+            {
+                sb.append(pad);
+                i = 0;
+            }
+            if(r.length() > maxChars)
+            {
+                int j = 0;
+                while(j < r.length())
+                {
+                    sb.append(j + maxChars < r.length() ? r.substring(j, j + maxChars): r.substring(j));
+                    j += maxChars;
+                    sb.append(pad);
+                }
+            }
+            else
+            {
+                sb.append(r).append(" ");
+                i += r.length() + 1;
+            }
+        }
+        return sb.toString().trim();
     }
 }
