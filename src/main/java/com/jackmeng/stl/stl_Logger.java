@@ -65,7 +65,7 @@ public class stl_Logger
 
     public synchronized void push(Object contents)
     {
-        String placeholder = "{" + String.format("%08d", COLLECTED + 1) + " | " + String.format("%08d", CYCLE.get()) + "}   |   [" + stl_Chrono.format_millis("HH:mm:ss MM_dd_YYYY") + "]    >    ";
+        String placeholder = String.format("%09d", COLLECTED + 1) + " | " + String.format("%09d", CYCLE.get()) + "   |   " + stl_Chrono.format_millis("HH:mm:ss MM/dd/YYYY") + "    |    ";
         if(saving.get())
             afterRoutine.add(() -> logs.push(placeholder + stl_Str.insert_nl(contents.toString(), char_per_line(), "\n" + stl_Str.n_copies(placeholder.length() - 5, " ")  + "|    ")));
         else
