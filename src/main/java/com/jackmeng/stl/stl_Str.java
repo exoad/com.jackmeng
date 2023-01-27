@@ -58,6 +58,46 @@ public final class stl_Str
         return template;
     }
 
+    public static int instances(String payload, String toFind)
+    {
+        int last = 0, i = 0;
+        while((last = payload.indexOf(toFind, last)) != -1)
+        {
+            i++;
+            last += toFind.length() - 1;
+        }
+        return i;
+    }
+
+    public static boolean is_one_type_commaed(String input)
+    {
+        String[] parts = input.split(",");
+        Class<?> clazz = null;
+        boolean isValid = true;
+        for (String part : parts) {
+            if (part.isEmpty()) {
+                isValid = false;
+                break;
+            }
+            Object obj = (part.length() == 1) ? part.charAt(0) : part;
+            if (clazz == null) {
+                if (obj instanceof CharSequence || obj instanceof Character || obj instanceof Number) {
+                    clazz = obj.getClass();
+                } else {
+                    isValid = false;
+                    break;
+                }
+            } else {
+                if (!obj.getClass().equals(clazz)) {
+                    isValid = false;
+                    break;
+                }
+            }
+        }
+        return isValid;
+    }
+
+
     public static String insert_nl(String input, int maxChars, String optionalPad)
     {
         String pad = optionalPad == null ? "\n" : optionalPad;
