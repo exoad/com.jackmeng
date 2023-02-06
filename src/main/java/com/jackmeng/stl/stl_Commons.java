@@ -10,6 +10,11 @@ public final class stl_Commons
         return stl_Str.instances(type.getCanonicalName(), "[]");
     }
 
+    public static <T, E> Object if_else(boolean expr, T if_, E else_)
+    {
+        return expr ? if_ : else_;
+    }
+
     public static boolean is_array(Class<?> type)
     {
         return type.getCanonicalName().contains("[]");
