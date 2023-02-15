@@ -8,7 +8,7 @@ import java.util.Vector;
 public class stl_ExecutionList
     implements Runnable
 {
-    private volatile SoftReference<Vector<stl_Struct.struct_Pair<CharSequence, Runnable>>> tasks;
+    private final SoftReference<Vector<stl_Struct.struct_Pair<CharSequence, Runnable>>> tasks;
 
     public stl_ExecutionList()
     {

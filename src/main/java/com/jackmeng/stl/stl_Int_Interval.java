@@ -1,0 +1,12 @@
+package com.jackmeng.stl;
+
+public class stl_Int_Interval
+{
+    int low, high;
+
+    public stl_Int_Interval(int low, int high)
+    {
+        this.low = low;
+        this.high = high;
+    }
+}
