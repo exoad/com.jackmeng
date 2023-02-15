@@ -21,11 +21,21 @@ public final class stl_Struct
                     + ":[" + first + "," + second + "]";
         }
 
+        public static <F, L> stl_Struct.struct_Pair<F, L> make(F first, L last)
+        {
+            return new stl_Struct.struct_Pair<>(first, last);
+        }
+
+        public static stl_Struct.struct_Pair<?,?> make(Object[] e)
+        {
+            return stl_Struct.struct_Pair.make(e[0], e[1]);
+        }
+
         @Override public boolean equals(Object cum)
         {
-            if (!(cum instanceof struct_Pair< ?, ? >))
+            if (!(cum instanceof struct_Pair<?, ?>))
                 return false;
-            return ((struct_Pair< ?, ? >)cum).first.equals(first) && ((struct_Pair< ?, ? >)cum).second.equals(second);
+            return ((struct_Pair<?, ?>) cum).first.equals(first) && ((struct_Pair<?, ?>) cum).second.equals(second);
         }
 
         @Override public int hashCode()

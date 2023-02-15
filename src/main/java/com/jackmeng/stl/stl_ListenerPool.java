@@ -7,14 +7,10 @@ public class stl_ListenerPool<T>
     private String name;
     private final List<stl_Listener<T>> listeners;
 
-    public stl_ListenerPool(String poolName, boolean addLogListener)
+    public stl_ListenerPool(String poolName)
     {
         this.name = poolName;
         listeners = new Vector<>(5);
-
-        if(addLogListener) listeners.add((x) -> {
-            return null;
-        });
     }
 
     public String name()

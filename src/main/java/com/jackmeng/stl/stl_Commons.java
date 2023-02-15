@@ -14,7 +14,6 @@ public final class stl_Commons
     {
         return expr ? if_ : else_;
     }
-
     public static boolean is_array(Class<?> type)
     {
         return type.getCanonicalName().contains("[]");
