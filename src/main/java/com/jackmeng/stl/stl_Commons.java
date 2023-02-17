@@ -18,4 +18,9 @@ public final class stl_Commons
     {
         return type.getCanonicalName().contains("[]");
     }
+
+    public static <T> stl_ArrItr<T> for_each(T[] e)
+    {
+        return new stl_ArrItr<>(e);
+    }
 }

@@ -90,6 +90,11 @@ public class stl_Complex
                 imaginary / (real * real + imaginary * imaginary));
     }
 
+    public stl_Complex conj()
+    {
+        return new stl_Complex(real, -imaginary);
+    }
+
     public stl_Complex scale(double k)
     {
         return new stl_Complex(k * this.real(), k * this.imaginary());
