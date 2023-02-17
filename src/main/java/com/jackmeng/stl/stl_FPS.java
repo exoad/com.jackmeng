@@ -11,25 +11,32 @@ import java.util.List;
  *
  * @author Jack Meng
  */
-public class stl_FPS extends Thread {
+public class stl_FPS
+        extends Thread
+{
     private double fps, min = 3000000000.0d, max = 0.0d;
-    private final List<Runnable> listeners = new ArrayList<>();
+    private final List< Runnable > listeners = new ArrayList<>();
 
-    public void addUpdatePromise(Runnable... promises) {
+    public void addUpdatePromise(Runnable... promises)
+    {
         listeners.addAll(Arrays.asList(promises));
     }
 
-    private void notifyPromises() {
+    private void notifyPromises()
+    {
         listeners.forEach(Runnable::run);
     }
 
-    @Override
-    public void run() {
-        while (true) {
+    @Override public void run()
+    {
+        while (true)
+        {
             long last = System.nanoTime();
-            try {
+            try
+            {
                 Thread.sleep(1000L);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 // IGNORED
             }
             fps = 1000000000.0 / (System.nanoTime() - last);
@@ -42,15 +49,18 @@ public class stl_FPS extends Thread {
         }
     }
 
-    public double getFPS() {
+    public double getFPS()
+    {
         return fps;
     }
 
-    public double getMin() {
+    public double getMin()
+    {
         return min;
     }
 
-    public double getMax() {
+    public double getMax()
+    {
         return max;
     }
 
