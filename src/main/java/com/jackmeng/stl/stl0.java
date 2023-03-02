@@ -12,9 +12,9 @@ final class stl0 {
         return Class.forName(str).getTypeParameters().length > 0;
     }
 
-    public static char dirm()
+    public static String dirm()
     {
-        return System.getProperty("os.name").toLowerCase().contains("wi") ? '\\' : '/';
+        return System.getProperty("file.separator");
     }
 
     public static boolean isGeneric(Class<?> e)
