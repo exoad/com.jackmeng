@@ -5,6 +5,8 @@ import javax.swing.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -86,5 +88,19 @@ public class stl_AssetFetcher
         }
         lazyResource_cache.put(path, i);
         return i;
+    }
+
+    public byte[] url(String url)
+            throws IOException
+    {
+        if (lazyResource_cache.containsKey(url) && lazyResource_cache.get(url) instanceof byte[])
+            return byte[].class.cast(lazyResource_cache.get(url));
+        URL resourceUrl = new URL(url);
+        try (InputStream inputStream = resourceUrl.openStream())
+        {
+            byte[] resourceBytes = inputStream.readAllBytes();
+            lazyResource_cache.put(url, resourceBytes);
+            return resourceBytes;
+        }
     }
 }
