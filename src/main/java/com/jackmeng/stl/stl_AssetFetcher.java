@@ -7,25 +7,34 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 import java.awt.image.*;
 
 public class stl_AssetFetcher
 {
 
-    private final Map< String, Object > lazyResource_cache = new HashMap<>();
+    public enum assetfetcher_FetcherStyle {
+        WEAK, STRONG
+    }
+
+    private final Map< String, Object > lazyResource_cache;
+
+    public stl_AssetFetcher(assetfetcher_FetcherStyle style)
+    {
+        lazyResource_cache = style == assetfetcher_FetcherStyle.WEAK ? new WeakHashMap<>() : new HashMap<>();
+    }
 
     /**
      * @param path
      * @return ImageIcon
      */
-    public ImageIcon getFromAsImageIcon(String path)
+    public ImageIcon image_icon(String path)
     {
         if (lazyResource_cache.containsKey(path) && lazyResource_cache.get(path) instanceof ImageIcon)
             return (ImageIcon) lazyResource_cache.get(path);
         ImageIcon i;
         try
         {
-
             i = new ImageIcon(
                     java.util.Objects.requireNonNull(getClass().getResource(path)));
         } catch (NullPointerException e)
@@ -36,7 +45,7 @@ public class stl_AssetFetcher
         return i;
     }
 
-    public BufferedImage getFromAsImage(String path)
+    public BufferedImage image(String path)
     {
         if (lazyResource_cache.containsKey(path) && lazyResource_cache.get(path) instanceof BufferedImage)
             return (BufferedImage) lazyResource_cache.get(path);
@@ -62,7 +71,7 @@ public class stl_AssetFetcher
      * @param path
      * @return File
      */
-    public File getFromAsFile(String path)
+    public File file(String path)
     {
         if (lazyResource_cache.containsKey(path))
             return (File) lazyResource_cache.get(path);

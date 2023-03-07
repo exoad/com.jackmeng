@@ -20,4 +20,9 @@ package com.jackmeng.stl;
 public final class stl_Optional< T >
 {
 
+
+  private stl_Optional(T targetValue)
+  {
+
+  }
 }

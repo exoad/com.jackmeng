@@ -1,10 +1,6 @@
 package com.jackmeng.stl;
 
-import java.io.Serializable;
-
 public class stl_AnsiMake
-    implements
-        Serializable
 {
     private final Object[] payload;
     private final stl_AnsiColors[] colors;

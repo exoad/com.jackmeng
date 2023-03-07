@@ -2,8 +2,8 @@ package com.jackmeng.stl;
 
 import java.io.Serializable;
 
-public class stl_Wrap <T>
-    implements
+public class stl_Wrap< T >
+        implements
         Serializable
 {
     public T obj;

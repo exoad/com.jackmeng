@@ -5,7 +5,6 @@ import java.util.Date;
 
 public final class stl_Chrono
 {
-
     public static String format_millis(String format)
     {
         long t = System.currentTimeMillis();

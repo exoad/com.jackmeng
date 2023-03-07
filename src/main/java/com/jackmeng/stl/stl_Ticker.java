@@ -10,16 +10,17 @@ public class stl_Ticker
   {
     TPS,
     TPS_ACTIVATION_ERROR,
+    TPS_LATENCY,
 
   }
 
-  private Map<String, Double> stats;
-  private stl_ListenerPool<Map.Entry<String, Double[]>> listeners;
+  private final Map<ticker_Stats, Double> stats;
+  private final stl_ListenerPool<stl_Struct.struct_Pair<String, Double>> listeners;
 
   public stl_Ticker()
   {
     stats = new HashMap<>();
-    listeners = new stl_ListenerPool<>("")
+    listeners = new stl_ListenerPool<>("stl_ticker_obj_" + hashCode());
   }
 
   @Override public void run()

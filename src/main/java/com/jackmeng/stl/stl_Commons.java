@@ -3,23 +3,30 @@ package com.jackmeng.stl;
 public final class stl_Commons
 {
     private stl_Commons()
-    {}
+    {
+    }
 
-    public static int array_dim(Class<?> type)
+    public static int array_dim(Class< ? > type)
     {
         return stl_Str.instances(type.getCanonicalName(), "[]");
     }
 
-    public static <T, E> Object if_else(boolean expr, T if_, E else_)
+    public static < T, E > Object if_else(boolean expr, T if_, E else_)
     {
         return expr ? if_ : else_;
     }
-    public static boolean is_array(Class<?> type)
+
+    public static < T, E > Object nilable(T _check, E else_)
+    {
+        return if_else(_check == null, _check, else_);
+    }
+
+    public static boolean is_array(Class< ? > type)
     {
         return type.getCanonicalName().contains("[]");
     }
 
-    public static <T> stl_ArrItr<T> for_each(T[] e)
+    public static < T > stl_ArrItr< T > for_each(T[] e)
     {
         return new stl_ArrItr<>(e);
     }
