@@ -5,3 +5,8 @@ build
 .classpath
 .project
 bin
+.vscode
+*.class
+*.o
+*.exe
+*.i
