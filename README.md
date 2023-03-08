@@ -13,11 +13,10 @@ For third parties, I suggest you NOT use this library for any advanced computati
 
 In terms of my projects, this library helps to form the basis of all. Changing one specific parameter changes the functionality in all of my subsequent projects, allowing for zero hassle (where I have to go to each project and update the existing source code).
 
-if you wish to use this library, this library is dual licensed and you must acknowledge either:
+if you wish to use this library, this library is dual licensed and you must acknowledge one:
 
-[BSD-3 "Revised"](./LICENSE.md)
+Read [LICENSE](./LICENSE)
 
-[Apache 2.0](./LICENSE)
 
 # Building
 Run the platform specific Gradle build code for your system.
