@@ -1,5 +1,7 @@
 package com.jackmeng.stl;
 
+import java.util.Locale;
+
 public final class stl_Commons
 {
     private stl_Commons()
@@ -29,5 +31,17 @@ public final class stl_Commons
     public static < T > stl_ArrItr< T > for_each(T[] e)
     {
         return new stl_ArrItr<>(e);
+    }
+
+    public enum SysArch { X64, X86, ARM, ERR }
+
+    public static SysArch sys_bitness()
+    {
+        String arch = System.getProperty("os.arch").toLowerCase(Locale.ENGLISH);
+
+        return arch.contains("64") ? SysArch.X64 :
+                arch.contains("86") ? SysArch.X86 :
+                        arch.contains("arm") ? SysArch.ARM :
+                                SysArch.ERR;
     }
 }
