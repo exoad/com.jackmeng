@@ -1,10 +1,12 @@
+// Copyright 2023 Jack Meng. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package com.jackmeng.stl;
 
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
-import java.util.Arrays;
-import java.util.Objects;
 
 public final class stl_SwingHelper
 {
