@@ -40,8 +40,7 @@ public final class stl_Commons
         String arch = System.getProperty("os.arch").toLowerCase(Locale.ENGLISH);
 
         return arch.contains("64") ? SysArch.X64 :
-                arch.contains("86") ? SysArch.X86 :
-                        arch.contains("arm") ? SysArch.ARM :
+                arch.contains("86") ? SysArch.X86 : arch.contains("arm") ? SysArch.ARM :
                                 SysArch.ERR;
     }
 }
