@@ -4,9 +4,16 @@
 
 package com.jackmeng.stl;
 
+import javax.swing.JTree;
 import javax.swing.border.Border;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import com.jackmeng.stl.stl_Struct.struct_Pair;
+
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class stl_SwingHelper
 {
@@ -31,7 +38,7 @@ public final class stl_SwingHelper
             this.strokeThickness = thickness;
             this.i = myInsets == null
                     ? new Insets(Math.max(1, strokeThickness - 1), Math.max(1, strokeThickness - 1),
-                    Math.max(1, strokeThickness - 1), Math.max(1, strokeThickness - 1))
+                            Math.max(1, strokeThickness - 1), Math.max(1, strokeThickness - 1))
                     : myInsets;
         }
 
@@ -58,7 +65,9 @@ public final class stl_SwingHelper
         }
     }
 
-    private stl_SwingHelper() {}
+    private stl_SwingHelper()
+    {
+    }
 
     public static Border rrect_border_uniform(int round_factor, Color color, int thickness)
     {
@@ -68,5 +77,37 @@ public final class stl_SwingHelper
     public static Shape rrect_clip(int x, int y, int arc_w, int arc_h, int w, int h)
     {
         return new RoundRectangle2D.Float(x, y, w, h, arc_w, arc_h);
+    }
+
+    public static stl_Struct.struct_Pair< JTree, Map< String, Component > > getComponentTreeWithInfo()
+    {
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Components");
+        Map< String, Component > componentInfoMap = new HashMap<>();
+        for (Window window : Window.getWindows())
+            traverseComponentHierarchy(window, rootNode, componentInfoMap);
+        JTree componentTree = new JTree(rootNode);
+        componentTree.setRootVisible(false);
+        return struct_Pair.make(componentTree, componentInfoMap);
+    }
+
+    private static void traverseComponentHierarchy(Component component, DefaultMutableTreeNode node,
+            Map< String, Component > componentInfoMap)
+    {
+        DefaultMutableTreeNode componentNode = new DefaultMutableTreeNode(getComponentInfo(component));
+        node.add(componentNode);
+        componentInfoMap.put(component.getName(), component);
+        if (component instanceof Container)
+            for (Component child : ((Container) component).getComponents())
+                traverseComponentHierarchy(child, componentNode, componentInfoMap);
+    }
+
+    private static String getComponentInfo(Component component)
+    {
+        String className = component.getClass().getSimpleName();
+        String name = component.getName();
+        Rectangle bounds = component.getBounds();
+        Point location = component.getLocation();
+        return className + " - " + name + " - x: " + location.x + ", y: " + location.y + ", width: " +
+                bounds.width + ", height: " + bounds.height;
     }
 }

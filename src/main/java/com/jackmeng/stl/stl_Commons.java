@@ -5,6 +5,7 @@
 package com.jackmeng.stl;
 
 import java.util.Locale;
+import java.util.function.Consumer;
 
 public final class stl_Commons
 {
@@ -37,14 +38,26 @@ public final class stl_Commons
         return new stl_ArrItr<>(e);
     }
 
-    public enum SysArch { X64, X86, ARM, ERR }
+    public enum SysArch {
+        X64, X86, ARM, ERR
+    }
 
     public static SysArch sys_bitness()
     {
         String arch = System.getProperty("os.arch").toLowerCase(Locale.ENGLISH);
 
-        return arch.contains("64") ? SysArch.X64 :
-                arch.contains("86") ? SysArch.X86 : arch.contains("arm") ? SysArch.ARM :
-                                SysArch.ERR;
+        return arch.contains("64") ? SysArch.X64
+                : arch.contains("86") ? SysArch.X86 : arch.contains("arm") ? SysArch.ARM : SysArch.ERR;
+    }
+
+    public static < T > stl_Listener< T > consumer2listener(Consumer< T > consume)
+    {
+        return new stl_Listener< T >() {
+            @Override public Void call(T e)
+            {
+                consume.accept(e);
+                return null;
+            }
+        };
     }
 }
