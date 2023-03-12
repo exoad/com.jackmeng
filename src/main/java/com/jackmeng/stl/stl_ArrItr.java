@@ -7,9 +7,9 @@ package com.jackmeng.stl;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class stl_ArrItr<T>
-    implements
-        Iterator<T>
+public class stl_ArrItr< T >
+        implements
+        Iterator< T >
 {
     private final T[] arr;
     private int i = 0;
@@ -19,14 +19,15 @@ public class stl_ArrItr<T>
         this.arr = arr;
     }
 
-    @Override
-    public boolean hasNext() {
+    @Override public boolean hasNext()
+    {
         return i < arr.length;
     }
 
-    @Override
-    public T next() {
-        if(hasNext()) return arr[i++];
+    @Override public T next()
+    {
+        if (hasNext())
+            return arr[i++];
         else throw new NoSuchElementException();
     }
 }
