@@ -1,3 +1,7 @@
+rem Copyright 2023 Jack Meng. All rights reserved.
+rem Use of this source code is governed by a BSD-style
+rem license that can be found in the LICENSE file.
+
 @rem
 @rem Copyright 2015 the original author or authors.
 @rem
