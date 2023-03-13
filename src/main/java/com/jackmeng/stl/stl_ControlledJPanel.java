@@ -36,9 +36,7 @@ public class stl_ControlledJPanel extends JPanel
     g.fillRect(0, 0, getWidth(), getHeight());
     float currentFPS = 1000f / scheduledFuture.getDelay(TimeUnit.MILLISECONDS);
     for (Consumer< Float > listener : fpsListeners)
-    {
       listener.accept(currentFPS);
-    }
   }
 
   public void setFPS(int fps)
