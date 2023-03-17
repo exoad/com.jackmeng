@@ -30,6 +30,7 @@ public final class stl_Images
         sum += value;
       }
     }
+
     assert sum != 0;
     for (int i = 0; i < data.length; i++)
       data[i] /= sum;

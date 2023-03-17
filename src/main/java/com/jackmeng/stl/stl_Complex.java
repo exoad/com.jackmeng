@@ -7,6 +7,8 @@ package com.jackmeng.stl;
 import java.util.Objects;
 
 public class stl_Complex
+        implements
+        Comparable< stl_Complex >
 {
     private double real, imaginary;
 
@@ -107,5 +109,9 @@ public class stl_Complex
     @Override public int hashCode()
     {
         return Objects.hash(imaginary, real);
+    }
+
+    @Override public int compareTo(stl_Complex o)
+    {
     }
 }

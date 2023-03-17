@@ -85,7 +85,9 @@ public class stl_RayCaster
       double sideDistX;
       double sideDistY;
 
-      double deltaDistX = Math.abs(1 / rayDirX);
+      float integral_Dist_X = 0.1F;
+
+      double deltaDistX = Math.abs(integral_Dist_X / rayDirX);
       double deltaDistY = Math.abs(1 / rayDirY);
       double perpWallDist;
 
