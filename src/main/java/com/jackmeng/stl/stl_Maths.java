@@ -15,9 +15,4 @@ public final class stl_Maths
             result = result * (n - k + i) / i;
         return result;
     }
-
-    public static double randomRange(double start, double end)
-    {
-    
-    }
 }
