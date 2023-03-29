@@ -2,9 +2,9 @@ package com.jackmeng.stl;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.net.URI;
 
 public final class stl_Files
 {
@@ -31,6 +31,11 @@ public final class stl_Files
     {
       errorHandler.call(e);
     }
+  }
+
+  public static URI uri(String fileName)
+  {
+    return new File(fileName).toPath().toUri();
   }
 
   public static void erasure_create_file(String fileName, stl_Callback< Void, Exception > errorHandler)
