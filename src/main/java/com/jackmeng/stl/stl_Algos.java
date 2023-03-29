@@ -23,6 +23,22 @@ public final class stl_Algos
   {
   }
 
+  public static double[] normalize(double[] data)
+  {
+    double[] result = new double[data.length];
+    double sum = 0.0;
+    for (double value : data)
+      sum += value;
+    double mean = sum / data.length;
+    double variance = 0.0;
+    for (double value : data)
+      variance += Math.pow(value - mean, 2);
+    double standardDeviation = Math.sqrt(variance / data.length);
+    for (int i = 0; i < data.length; i++)
+      result[i] = (data[i] - mean) / standardDeviation;
+    return result;
+  }
+
   /**
    * Generic Biased Binary Search. If you wanted a regular Binary Search, you may
    * use a package like

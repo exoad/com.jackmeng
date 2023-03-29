@@ -23,7 +23,7 @@ public class stl_Bezier
         for (int i = 0; i <= degree; i++)
         {
             double controlPoint = controlPoints.get(i);
-            double coefficient = stl_Maths.binomial_coefficient(degree, i) * Math.pow(1 - t, degree - i)
+            double coefficient = stl_Maths.binomial_coefficient(degree, i) * Math.pow(1 - t, (double) degree - i)
                     * Math.pow(t, i);
             result += controlPoint * coefficient;
         }
