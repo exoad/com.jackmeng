@@ -8,12 +8,12 @@ import java.util.List;
 
 public class stl_Spline
 {
-    private final List<Double> x;
-    private final List<Double> y;
+    private final List< Double > x;
+    private final List< Double > y;
     private final int n;
     private final double[] z;
 
-    public stl_Spline(List<Double> x, List<Double> y)
+    public stl_Spline(List< Double > x, List< Double > y)
     {
         this.x = x;
         this.y = y;
@@ -45,7 +45,8 @@ public class stl_Spline
     {
         int i = 0;
         int j = n - 1;
-        while (j - i > 1) {
+        while (j - i > 1)
+        {
             int k = (i + j) / 2;
             if (x.get(k) > t)
                 j = k;
@@ -53,6 +54,7 @@ public class stl_Spline
                 i = k;
         }
         double dx = t - x.get(i);
-        return y.get(i) + dx * (z[i] / 2 + dx * (z[j] - z[i]) / (6 * (x.get(j) - x.get(i))) + (y.get(j) - y.get(i)) / (x.get(j) - x.get(i)));
+        return y.get(i) + dx * (z[i] / 2 + dx * (z[j] - z[i]) / (6 * (x.get(j) - x.get(i)))
+                + (y.get(j) - y.get(i)) / (x.get(j) - x.get(i)));
     }
 }

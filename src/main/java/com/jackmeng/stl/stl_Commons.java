@@ -7,10 +7,22 @@ package com.jackmeng.stl;
 import java.util.Locale;
 import java.util.function.Consumer;
 
+import com.jackmeng.stl.types.Null;
+
 public final class stl_Commons
 {
     private stl_Commons()
     {
+    }
+
+    public static void async(Runnable task)
+    {
+        stl0.INTERNAL.EXECS.submit(task);
+    }
+
+    public static void async(stl_Callback< Void, ? extends Null > task)
+    {
+        stl0.INTERNAL.EXECS.submit(() -> task.call(null));
     }
 
     public static int array_dim(Class< ? > type)

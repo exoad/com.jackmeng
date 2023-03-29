@@ -79,6 +79,21 @@ public final class stl_SwingHelper
         return new RoundRectangle2D.Float(x, y, w, h, arc_w, arc_h);
     }
 
+    public static GraphicsDevice default_gdev()
+    {
+        return GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    }
+
+    public static GraphicsConfiguration default_gconf()
+    {
+        return default_gdev().getDefaultConfiguration();
+    }
+
+    public static int acc_mem()
+    {
+        return default_gdev().getAvailableAcceleratedMemory();
+    }
+
     public static stl_Struct.struct_Pair< JTree, Map< String, Component > > getComponentTreeWithInfo()
     {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Components");

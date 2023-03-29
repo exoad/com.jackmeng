@@ -98,9 +98,9 @@ public class stl_CircularBuffer
 
     public void init()
     {
-      /*---------------------------------------------------------------------------------------- /
-      / returns the buffer to the original state, and is unnecessary for direct initalialization /
-      /-----------------------------------------------------------------------------------------*/
+        /*---------------------------------------------------------------------------------------- /
+        / returns the buffer to the original state, and is unnecessary for direct initalialization /
+        /-----------------------------------------------------------------------------------------*/
         start = 0;
         sz = 0;
     }
@@ -115,7 +115,7 @@ public class stl_CircularBuffer
         return calc_offset(start, sz, buffer.length);
     }
 
-    public void peek(stl_Callback<Void, ByteBuffer> e)
+    public void peek(stl_Callback< Void, ByteBuffer > e)
     {
         int f1 = start;
         int f1_sz = buffer.length - start;

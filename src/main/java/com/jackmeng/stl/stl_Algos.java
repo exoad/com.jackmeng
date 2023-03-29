@@ -23,8 +23,6 @@ public final class stl_Algos
   {
   }
 
-  
-
   /**
    * Generic Biased Binary Search. If you wanted a regular Binary Search, you may
    * use a package like
@@ -151,6 +149,21 @@ public final class stl_Algos
         major = null;
     }
     return major;
+  }
+
+  public static double lagrange(double[] x, double[] y, double x_input)
+  {
+    int n = x.length;
+    double result = 0.0;
+    for (int i = 0; i < n; i++)
+    {
+      double term = y[i];
+      for (int j = 0; j < n; j++)
+        if (i != j)
+          term *= (x_input - x[j]) / (x[i] - x[j]);
+      result += term;
+    }
+    return result;
   }
 
   public static < T > List< T > optimal_eviction_policy(List< T > accesses, int cache_sz)
