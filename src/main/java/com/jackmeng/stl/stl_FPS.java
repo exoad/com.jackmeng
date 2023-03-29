@@ -17,8 +17,9 @@ import java.util.List;
  */
 public class stl_FPS
         extends Thread
+        
 {
-    private double fps, min = 3000000000.0d, max = 0.0d;
+    private double fps, min = Double.MAX_VALUE, max = 0.0d;
     private final List< Runnable > listeners = new ArrayList<>();
 
     public void addUpdatePromise(Runnable... promises)

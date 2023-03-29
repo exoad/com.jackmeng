@@ -72,7 +72,6 @@ public class stl_LRU_Cache< K, V >
       addToFront(node, getColor(key));
     }
   }
-
   private void evict()
   {
     for (int i = 0; i < numColors; i++)
