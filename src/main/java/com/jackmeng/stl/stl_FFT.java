@@ -22,11 +22,10 @@ public class stl_FFT
 
         stl_Complex[] q = cooleytukey(even);
 
-        stl_Complex[] odd = even;
         for (int i = 0; i < n / 2; i++)
-            odd[i] = x[2 * i + 1];
+            even[i] = x[2 * i + 1];
 
-        stl_Complex[] r = cooleytukey(odd);
+        stl_Complex[] r = cooleytukey(even);
 
         stl_Complex[] y = new stl_Complex[n];
         for (int k = 0; k < n / 2; k++)

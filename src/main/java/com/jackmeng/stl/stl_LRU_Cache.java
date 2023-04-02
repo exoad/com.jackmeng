@@ -12,10 +12,8 @@ public class stl_LRU_Cache< K, V >
 
   private final int capacity;
   private final Map< K, Node< K, V > > map;
-  private final Node< K, V > head;
   private final Node< K, V > tail;
   private final int numColors;
-  private final int blockSize;
   private final Node< K, V >[][] colorBlocks;
 
   @SuppressWarnings("unchecked")
@@ -23,12 +21,11 @@ public class stl_LRU_Cache< K, V >
   {
     this.capacity = capacity;
     this.map = new HashMap<>(capacity);
-    this.head = new Node<>(null, null);
+    Node<K, V> head = new Node<>(null, null);
     this.tail = new Node<>(null, null);
     head.next = tail;
     tail.prev = head;
     this.numColors = numColors;
-    this.blockSize = blockSize;
     this.colorBlocks = new Node[numColors][blockSize];
     for (int i = 0; i < numColors; i++)
     {

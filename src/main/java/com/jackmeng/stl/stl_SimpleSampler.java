@@ -15,9 +15,9 @@ public class stl_SimpleSampler< T >
 {
     private final int sampleRate;
     private int counter;
-    private final Consumer< T > callback;
+    private final stl_Callback< Void, T > callback;
 
-    public stl_SimpleSampler(int sampleRate, Consumer< T > callback)
+    public stl_SimpleSampler(int sampleRate, stl_Callback< Void,  T > callback)
     {
         this.sampleRate = sampleRate;
         this.callback = callback;
@@ -27,11 +27,11 @@ public class stl_SimpleSampler< T >
     @Override public void accept(T t)
     {
         if (counter == 0)
-            callback.accept(t);
+            callback.call(t);
         counter = (counter + 1) % sampleRate;
     }
 
-    public static void sampleFile(String filePath, int sampleRate, Consumer< String > callback)
+    public static void sampleFile(String filePath, int sampleRate, stl_Callback< Void, String > callback)
             throws IOException
     {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath)))

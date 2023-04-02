@@ -9,8 +9,8 @@ import java.util.Queue;
 
 public class stl_LazyQueue< T >
 {
-  private Queue< T > queue = new LinkedList<>();
-  private Queue< T > lazyQueue = new LinkedList<>();
+  private final Queue< T > queue = new LinkedList<>();
+  private final Queue< T > lazyQueue = new LinkedList<>();
 
   public void enqueue(T item)
   {

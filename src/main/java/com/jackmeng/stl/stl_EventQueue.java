@@ -11,7 +11,7 @@ public class stl_EventQueue
     Runnable
 {
 
-  private LinkedList< Runnable > eventQueue;
+  private final LinkedList< Runnable > eventQueue;
   private boolean isProcessingEvents;
 
   public stl_EventQueue()

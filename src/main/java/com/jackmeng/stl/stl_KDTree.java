@@ -23,7 +23,7 @@ public class stl_KDTree
     }
   }
 
-  private KDNode root;
+  private final KDNode root;
 
   public stl_KDTree(List< double[] > points)
   {
@@ -41,10 +41,9 @@ public class stl_KDTree
     if (points.size() == 1)
       return new KDNode(points.get(0));
 
-    Collections.sort(points, new Comparator< double[] >() {
-      public int compare(double[] a, double[] b)
-      {
-        return a[axis] < b[axis] ? -1 : a[axis] > b[axis] ? 1 : 0;
+    points.sort(new Comparator<double[]>() {
+      public int compare(double[] a, double[] b) {
+        return Double.compare(a[axis], b[axis]);
       }
     });
 

@@ -115,7 +115,7 @@ public final class stl_BlurHash_2
     return builder.toString();
   }
 
-  private static char[] BASE83_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~"
+  private static final char[] BASE83_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~"
       .toCharArray();
 
   private static String getBase83(int value, int numChars)

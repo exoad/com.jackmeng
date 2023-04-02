@@ -17,15 +17,15 @@ import java.util.function.Consumer;
 public class stl_ControlledJPanel_2
             extends JPanel
 {
-      private transient List< Consumer< Graphics > > drawingMethods = new ArrayList<>();
-      private transient List< Consumer< Float > > fpsListeners = new ArrayList<>();
-      private transient ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-      private long startTime;
+      private final transient List< Consumer< Graphics > > drawingMethods = new ArrayList<>();
+      private final transient List< Consumer< Float > > fpsListeners = new ArrayList<>();
+      private final long startTime;
       private long frameCount;
 
       public stl_ControlledJPanel_2()
       {
             super();
+            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
             executor.scheduleAtFixedRate(this::redraw, 0, 16, TimeUnit.MILLISECONDS);
             startTime = System.nanoTime();
       }

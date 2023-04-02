@@ -76,7 +76,7 @@ public class stl_LazyJComponent
     return new Dimension(400, 400);
   }
 
-  private class SubscriptionImpl implements Flow.Subscription
+  private static class SubscriptionImpl implements Flow.Subscription
   {
     private volatile boolean isCanceled = false;
 

@@ -6,7 +6,8 @@ package com.jackmeng.stl;
 
 public class stl_DisjointSet
 {
-    private int[] parent, rank;
+    private final int[] parent;
+    private final int[] rank;
 
     public stl_DisjointSet(int size)
     {

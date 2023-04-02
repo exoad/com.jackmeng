@@ -22,7 +22,10 @@ public final class stl_Str
 
     public static boolean is_empty(CharSequence e)
     {
-        return e == null || e.length() == 0 || e.isEmpty() || (e instanceof String && ((String) e).isBlank() || ((String)e).matches("\\s+"));
+        if (e == null || e.length() == 0 || e.isEmpty()) return true;
+        if (e instanceof String && ((String) e).isBlank()) return true;
+        assert e instanceof String;
+        return ((String)e).matches("\\s+");
     }
 
     public static String interpolate0(String keyStart, String keyEnd, String template, String... payloads)
@@ -85,12 +88,7 @@ public final class stl_Str
             }
             Object obj = (part.length() == 1) ? part.charAt(0) : part;
             if (clazz == null) {
-                if (obj instanceof CharSequence || obj instanceof Character || obj instanceof Number) {
-                    clazz = obj.getClass();
-                } else {
-                    isValid = false;
-                    break;
-                }
+                clazz = obj.getClass();
             } else {
                 if (!obj.getClass().equals(clazz)) {
                     isValid = false;

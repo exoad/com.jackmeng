@@ -98,7 +98,7 @@ public class stl_AssetFetcher
             throws IOException
     {
         if (lazyResource_cache.containsKey(url) && lazyResource_cache.get(url) instanceof byte[])
-            return byte[].class.cast(lazyResource_cache.get(url));
+            return (byte[]) lazyResource_cache.get(url);
         URL resourceUrl = new URL(url);
         try (InputStream inputStream = resourceUrl.openStream())
         {
