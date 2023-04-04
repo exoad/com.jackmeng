@@ -12,11 +12,18 @@ import javax.sound.sampled.*;
 public class stl_SNDCircular
 {
   private SourceDataLine line;
-  private stl_CircularBuffer buffer;
+  private final stl_CircularBuffer buffer;
+  private final int buffer_size;
 
   public stl_SNDCircular()
   {
-    buffer = new stl_CircularBuffer();
+    this(1024, new stl_CircularBuffer());
+  }
+
+  public stl_SNDCircular(int buffer_size, stl_CircularBuffer reference)
+  {
+      buffer = reference;
+      this.buffer_size = buffer_size;
   }
 
   public void open(File file)
@@ -31,7 +38,7 @@ public class stl_SNDCircular
     line = (SourceDataLine) AudioSystem.getLine(info);
     line.open(format);
     line.start();
-    byte[] buf = new byte[1024];
+    byte[] buf = new byte[buffer_size];
     int bytesRead;
     while ((bytesRead = in.read(buf)) != -1)
       buffer.push(buf, 0, bytesRead);
@@ -41,7 +48,7 @@ public class stl_SNDCircular
   public void play()
   {
     new Thread(() -> {
-      byte[] data = new byte[1024];
+      byte[] data = new byte[buffer_size];
       while (buffer.used_sz() > 0)
       {
         int bytesRead = buffer.pop(data, 0, data.length);

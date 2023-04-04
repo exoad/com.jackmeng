@@ -4,7 +4,6 @@
 
 package com.jackmeng.stl;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,11 +40,7 @@ public class stl_KDTree
     if (points.size() == 1)
       return new KDNode(points.get(0));
 
-    points.sort(new Comparator<double[]>() {
-      public int compare(double[] a, double[] b) {
-        return Double.compare(a[axis], b[axis]);
-      }
-    });
+    points.sort(Comparator.comparingDouble(a -> a[axis]));
 
     int medianIndex = points.size() / 2;
     double[] medianPoint = points.get(medianIndex);
