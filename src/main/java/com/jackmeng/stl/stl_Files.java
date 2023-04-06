@@ -23,7 +23,7 @@ public final class stl_Files
   {
     try
     {
-      PrintWriter pw = new PrintWriter(new File(fileName));
+      PrintWriter pw = new PrintWriter(fileName);
       pw.print(content);
       pw.flush();
       pw.close();
@@ -56,7 +56,7 @@ public final class stl_Files
   {
     try
     {
-      PrintWriter pw = new PrintWriter(new File(fileName));
+      PrintWriter pw = new PrintWriter(fileName);
       pw.append(content);
       pw.flush();
       pw.close();
@@ -76,7 +76,7 @@ public final class stl_Files
   public static void fread_bl_1(String fileName, stl_Callback< Void, Exception > errorHandler,
       stl_Callback< Void, String > consumer)
   {
-    try (BufferedReader br = new BufferedReader(new FileReader(new File(fileName))))
+    try (BufferedReader br = new BufferedReader(new FileReader(fileName)))
     {
       while (br.ready())
         consumer.call(br.readLine());
@@ -96,7 +96,7 @@ public final class stl_Files
   public static void fread_s_1(String fileName, stl_Callback< Void, Exception > errorHandler,
       stl_Callback< Void, Byte > consumer)
   {
-    try (BufferedReader br = new BufferedReader(new FileReader(new File(fileName))))
+    try (BufferedReader br = new BufferedReader(new FileReader(fileName)))
     {
       while (br.ready())
         consumer.call((byte) (((Integer) br.read()).byteValue() & 0xFF));

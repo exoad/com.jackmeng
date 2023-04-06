@@ -7,7 +7,7 @@ package com.jackmeng.stl;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-import com.jackmeng.stl.types.Null;
+import com.jackmeng.stl.types.Null_t;
 
 public final class stl_Commons
 {
@@ -20,7 +20,7 @@ public final class stl_Commons
         stl0.INTERNAL.EXECS.submit(task);
     }
 
-    public static void async(stl_Callback< Void, ? extends Null > task)
+    public static void async(stl_Callback< Void, ? extends Null_t> task)
     {
         stl0.INTERNAL.EXECS.submit(() -> task.call(null));
     }

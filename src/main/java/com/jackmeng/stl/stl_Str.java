@@ -99,6 +99,12 @@ public final class stl_Str
         return isValid;
     }
 
+    public static boolean parse_bool(String content)
+    {
+        content = content.toLowerCase();
+        return content.equals("1") || content.equals("on") || content.equals("true") || content.equals("positive") || content.equals("in");
+    }
+
 
     public static String insert_nl(String input, int maxChars, String optionalPad)
     {

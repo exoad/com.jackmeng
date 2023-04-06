@@ -30,7 +30,7 @@ public class stl_DisjointSet
     public void union(int x, int y)
     {
         int root_x = find(x);
-        int root_y = find(y);
+        int root_y = find(y); // ??
         if(root_x == root_y) return;
 
         if(rank[root_x] < rank[root_y]) parent[root_x] = root_y;

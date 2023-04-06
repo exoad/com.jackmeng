@@ -19,7 +19,7 @@ public class stl_ControlledJPanel extends JPanel
 {
   private int fps;
   private transient ScheduledExecutorService executor;
-  private transient List< Consumer< Float > > fpsListeners = new ArrayList<>();
+  private final transient List< Consumer< Float > > fpsListeners = new ArrayList<>();
   private transient ScheduledFuture< ? > scheduledFuture;
 
   public stl_ControlledJPanel(int fps)
