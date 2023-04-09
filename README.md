@@ -13,6 +13,27 @@ The ultimate root of any of my Java Projects, containing all kinds of goodies an
 Base Version: 0.0.1a (InDev)<br>
 Latest Release: None
 
+# Using
+
+You can use JitPack:
+
+> **Step 1.** Add the JitPack repository to your build file 
+> Add it in your root build.gradle at the end of repositories:
+> ```
+> allprojects {
+>		repositories {
+>			...
+>			maven { url 'https://jitpack.io' }
+>		}
+>	}
+> ```
+> **Step 2.** Add the dependency
+> ```
+> dependencies {
+>	        implementation 'com.github.exoad:com.jackmeng:Tag'
+> }
+> ```
+
 # Why?
 This library isn't meant to replace the entirety of the JavaSDK and it's Standard Library, instead more of an extension to it. It adds functions to simplify the implementation of bootstrap code.
 For third parties, I suggest you NOT use this library for any advanced computations and rely more on well known or even proprietary libraries that have much more thoughout functions.
