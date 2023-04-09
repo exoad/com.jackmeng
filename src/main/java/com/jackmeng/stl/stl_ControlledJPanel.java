@@ -39,13 +39,18 @@ public class stl_ControlledJPanel extends JPanel
       listener.accept(currentFPS);
   }
 
-  public void setFPS(int fps)
+  public void target_fps(int fps)
   {
     this.fps = fps;
     scheduledFuture.cancel(false);
     executor.shutdown();
     executor = Executors.newSingleThreadScheduledExecutor();
     scheduledFuture = executor.scheduleAtFixedRate(this::repaint, 0, 1000 / fps, TimeUnit.MILLISECONDS);
+  }
+
+  public int fps()
+  {
+    return fps;
   }
 
   public void addFPSListener(Consumer< Float > listener)

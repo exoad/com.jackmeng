@@ -11,7 +11,12 @@ public final class stl_Chrono
 {
     public static String format_millis(String format)
     {
-        long t = System.currentTimeMillis();
+        return format_time(format,
+         System.currentTimeMillis());
+    }
+
+    public static String format_time(String format, long t)
+    {
         Date e = new Date(t);
         return new SimpleDateFormat(format).format(e);
     }

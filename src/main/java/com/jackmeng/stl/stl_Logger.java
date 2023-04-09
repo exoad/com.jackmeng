@@ -6,6 +6,9 @@ package com.jackmeng.stl;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+// import java.lang.ref.Reference;
+// import java.lang.ref.SoftReference;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -20,18 +23,26 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class stl_Logger
     implements
-        Runnable
+        Runnable,
+        Serializable
 {
+    public enum Logger_DisableBehavior
+    {
+        DROP_ALL, KEEP_ALL, CACHE_OLD;
+    }
+
     private final long try_save_ms_periodic;
     private final String saveLocation, name;
     private final File file;
     private final Stack<String> logs = new Stack<>();
     private boolean running = false, enabled = true;
     private final AtomicBoolean saving = new AtomicBoolean(false);
-    private final List<Runnable> afterRoutine;
-    private long COLLECTED = 0L;
+    private final transient List<Runnable> afterRoutine;
+    private transient long COLLECTED = 0L;
     private final AtomicLong CYCLE = new AtomicLong(0L);
     private int log_char_per_line = 70;
+    //private final Reference<Stack<String>> logs_cache = new SoftReference<>(new Stack<>());
+    //private Logger_DisableBehavior disableBehavior = Logger_DisableBehavior.KEEP_ALL;
 
     public stl_Logger(String loggerName, String saveLocationFolder, long save_time)
     {
@@ -41,6 +52,23 @@ public class stl_Logger
         this.file = new File(saveLocationFolder + stl0.dirm() + loggerName + "_" + stl_Chrono.format_millis() + ".log");
         afterRoutine = new ArrayList<>(10);
     }
+
+    public stl_Logger(String loggerName, long save_time)
+    {
+        this(loggerName, stl_Commons.tmpdir(), save_time);
+    }
+
+    // public Logger_DisableBehavior disableBehavior()
+    // {
+    //     return disableBehavior;
+    // }
+
+    // public synchronized Logger_DisableBehavior disableBehavior(Logger_DisableBehavior e)
+    // {
+    //     Logger_DisableBehavior old = this.disableBehavior;
+    //     this.disableBehavior = e;
+    //     return old;
+    // }
 
     public void enable(boolean e)
     {
@@ -128,14 +156,14 @@ public class stl_Logger
                             saving.set(true);
                             synchronized (logs) {
                                 StringBuilder sb = new StringBuilder();
-                                logs.forEach(x -> sb.append(x).append("\n"));
+                                while(!logs.isEmpty())
+                                    sb.append(logs.pop()).append('\n');
 
                                 try {
                                     Files.write(file.toPath(), sb.toString().getBytes(), StandardOpenOption.WRITE, StandardOpenOption.APPEND);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                logs.clear();
                                 if (afterRoutine.size() > 0)
                                     for(int i = 0; i < afterRoutine.size(); i++)
                                         afterRoutine.remove(i).run();

@@ -72,4 +72,9 @@ public final class stl_Commons
             }
         };
     }
+
+    public static String tmpdir()
+    {
+        return System.getProperty("java.io.tmpdir");
+    }
 }
