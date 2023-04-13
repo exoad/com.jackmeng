@@ -7,6 +7,11 @@ package com.jackmeng.stl;
 public final class stl_Struct
 {
 
+    public static <F, L> stl_Struct.struct_Pair<F, L> make_pair(F first, L last)
+    {
+        return struct_Pair.make(first, last);
+    }
+
     public static final class struct_Pair< A, B >
     {
         public final A first;

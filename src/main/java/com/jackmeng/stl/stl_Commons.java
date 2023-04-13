@@ -25,6 +25,12 @@ public final class stl_Commons
         stl0.INTERNAL.EXECS.submit(() -> task.call(null));
     }
 
+    public static <T> boolean array_has(T[] array, T key)
+    {
+        for(T r : array) if(r.equals(key)) return true;
+        return false;
+    }
+
     public static int array_dim(Class< ? > type)
     {
         return stl_Str.instances(type.getCanonicalName(), "[]");
