@@ -101,5 +101,6 @@ public class stl_CircularList< T >
     currentNode.next = currentNode.next.next;
     if (currentNode.next == null)
       tail = currentNode;
-  }
+
+    }
 }

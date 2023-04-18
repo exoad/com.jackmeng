@@ -12,20 +12,29 @@ public final class stl_Str
     {
     }
 
+    public static String from_char_arr(char[] e)
+    {
+        StringBuilder sb = new StringBuilder();
+        for(char x : e) sb.append(x);
+        return sb.toString();
+    }
+
     public static String n_copies(int n, String sequence)
     {
         StringBuilder sb = new StringBuilder();
-        while(n-- > 0)
+        while (n-- > 0)
             sb.append(sequence);
         return sb.toString();
     }
 
     public static boolean is_empty(CharSequence e)
     {
-        if (e == null || e.length() == 0 || e.isEmpty()) return true;
-        if (e instanceof String && ((String) e).isBlank()) return true;
+        if (e == null || e.length() == 0 || e.isEmpty())
+            return true;
+        if (e instanceof String && ((String) e).isBlank())
+            return true;
         assert e instanceof String;
-        return ((String)e).matches("\\s+");
+        return ((String) e).matches("\\s+");
     }
 
     public static String interpolate0(String keyStart, String keyEnd, String template, String... payloads)
@@ -68,7 +77,7 @@ public final class stl_Str
     public static int instances(String payload, String toFind)
     {
         int last = 0, i = 0;
-        while((last = payload.indexOf(toFind, last)) != -1)
+        while ((last = payload.indexOf(toFind, last)) != -1)
         {
             i++;
             last += toFind.length() - 1;
@@ -79,18 +88,24 @@ public final class stl_Str
     public static boolean is_one_type_commaed(String input)
     {
         String[] parts = input.split(",");
-        Class<?> clazz = null;
+        Class< ? > clazz = null;
         boolean isValid = true;
-        for (String part : parts) {
-            if (part.isEmpty()) {
+        for (String part : parts)
+        {
+            if (part.isEmpty())
+            {
                 isValid = false;
                 break;
             }
             Object obj = (part.length() == 1) ? part.charAt(0) : part;
-            if (clazz == null) {
+            if (clazz == null)
+            {
                 clazz = obj.getClass();
-            } else {
-                if (!obj.getClass().equals(clazz)) {
+            }
+            else
+            {
+                if (!obj.getClass().equals(clazz))
+                {
                     isValid = false;
                     break;
                 }
@@ -102,9 +117,9 @@ public final class stl_Str
     public static boolean parse_bool(String content)
     {
         content = content.toLowerCase();
-        return content.equals("1") || content.equals("on") || content.equals("true") || content.equals("positive") || content.equals("in");
+        return content.equals("1") || content.equals("on") || content.equals("true") || content.equals("positive")
+                || content.equals("in");
     }
-
 
     public static String insert_nl(String input, int maxChars, String optionalPad)
     {
@@ -112,19 +127,19 @@ public final class stl_Str
         StringBuilder sb = new StringBuilder();
         String[] w = input.split(" ");
         int i = 0;
-        for(String r : w)
+        for (String r : w)
         {
-            if(i + r.length() > maxChars)
+            if (i + r.length() > maxChars)
             {
                 sb.append(pad);
                 i = 0;
             }
-            if(r.length() > maxChars)
+            if (r.length() > maxChars)
             {
                 int j = 0;
-                while(j < r.length())
+                while (j < r.length())
                 {
-                    sb.append(j + maxChars < r.length() ? r.substring(j, j + maxChars): r.substring(j));
+                    sb.append(j + maxChars < r.length() ? r.substring(j, j + maxChars) : r.substring(j));
                     j += maxChars;
                     sb.append(pad);
                 }
