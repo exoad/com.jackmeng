@@ -16,7 +16,7 @@ public class stl_BloomFilterDS
     {
         this.bitset = new BitSet(size);
         this.hashFxs = new stl_HashFunction[hashes];
-        for(int i = 0; i < hashes; i++)
+        for (int i = 0; i < hashes; i++)
             hashFxs[i] = new stl_HashFunction(size);
     }
 
