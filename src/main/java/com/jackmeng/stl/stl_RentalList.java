@@ -5,18 +5,12 @@ package com.jackmeng.stl;
 import java.util.Iterator;
 
 public class stl_RentalList< T >
-    implements Iterable< T >
+    implements $RentaList< T >
 {
-  private stl_LooseList< stl_Struct.struct_Trio<> > list = new stl_LooseList<>();
-
-  public stl_RentalList(T[] initials)
-  {
-
+  public enum RentalList_Style {
+    TIMED, OPERATION, NONE;
   }
 
-  @Override public Iterator< T > iterator()
-  {
-    throw new UnsupportedOperationException("Unimplemented method 'iterator'");
-  }
+  private stl_LooseList< stl_Struct.struct_NamedPair< Long, T, String > > lot = new stl_LooseList<>();
 
 }

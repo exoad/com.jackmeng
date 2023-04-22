@@ -1,12 +1,14 @@
 package com.jackmeng.stl;
 
-import com.jackmeng.stl.types.Null_t;
-
 import java.io.PrintStream;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Map;
 
+/**
+ * A simple class to help with parsing String[] args or String... args
+ *
+ * @author Jack Meng
+ */
 public class stl_Commands
         implements
         Runnable
@@ -15,11 +17,47 @@ public class stl_Commands
             implements stl_Callback< String, String >
     {
         private boolean finished = false;
-        private final PrintStream ps;
+        private final String properName, commandName;
 
-        public Commands_Fx(PrintStream printstream)
+        /**
+         * <p>
+         * Constructs the necessary Command Function Object. There is also a separate
+         * constructor {@link #stl_Commands()} which inputs a null String as the default
+         * name <b>("DO NOT USE").
+         *
+         * @param properName
+         *            The properName is the string used in the real command argument. It
+         *            should preferably be all lowercase with underscores or all
+         *            uppercase.
+         * @param commandName
+         *            The commandName is the string used in the readable definitions and
+         *            manual definitions of the command. It should not be used for
+         *            anything else.
+         */
+        public Commands_Fx(String properName, String commandName)
         {
-            ps = printstream == null ? System.out : printstream;
+            this.properName = properName;
+            this.commandName = commandName;
+        }
+
+        public Commands_Fx()
+        {
+            this("\0", "\0");
+        }
+
+        public String properName()
+        {
+            return properName;
+        }
+
+        public String commandName()
+        {
+            return commandName;
+        }
+
+        public boolean matches(String input)
+        {
+            return properName.equalsIgnoreCase(input);
         }
 
         /**
@@ -38,16 +76,11 @@ public class stl_Commands
          * @return The prefix of the command name. Should be standarized to
          *         '-','--',or'---''
          */
-        public abstract char[] sequence();
+        public abstract String sequence();
 
         @Override public String call(String argument)
         {
             return consume(argument);
-        }
-
-        public PrintStream stream()
-        {
-            return ps;
         }
 
         /**
@@ -56,49 +89,52 @@ public class stl_Commands
          *
          * @return (true -> done >|| false -> not done)
          */
-        boolean finished()
+        public boolean finished()
         {
             return finished;
         }
 
-        public abstract Commands_Type associated_type();
+        public abstract Commands_Type[] associated_types();
     }
 
     public static class Type_INFORMATIONAL
             extends Commands_Fx
     {
+        private final String text;
 
-        public Type_INFORMATIONAL()
+        public Type_INFORMATIONAL(String text)
         {
-            super(System.out);
+            this.text = text;
+        }
+
+        public String text()
+        {
+            return text;
         }
 
         @Override public String consume(String argument)
         {
-
-            throw new UnsupportedOperationException("Unimplemented method 'consume'");
+            return this.text;
         }
 
-        @Override public char[] sequence()
+        @Override public String sequence()
         {
-            return new char[] { '-' };
+            return "--";
         }
 
-        @Override public Commands_Type associated_type()
+        @Override public Commands_Type[] associated_types()
         {
-
-            throw new UnsupportedOperationException("Unimplemented method 'associated_type'");
+            return new Commands_Type[] { Commands_Type.INFORMATIONAl };
         }
 
     }
 
-    public static class Type_DYNAMIC
+    public static final class Type_DYNAMIC
             extends Commands_Fx
     {
 
         public Type_DYNAMIC()
         {
-            super(System.out);
         }
 
         @Override public String consume(String argument)
@@ -107,12 +143,12 @@ public class stl_Commands
             throw new UnsupportedOperationException("Unimplemented method 'consume'");
         }
 
-        @Override public char[] sequence()
+        @Override public String sequence()
         {
-            return new char[] { '-', '-' };
+            return "--";
         }
 
-        @Override public Commands_Type associated_type()
+        @Override public Commands_Type[] associated_types()
         {
 
             throw new UnsupportedOperationException("Unimplemented method 'associated_type'");
@@ -120,13 +156,12 @@ public class stl_Commands
 
     }
 
-    public static class Type_HYBRID
+    public static final class Type_HYBRID
             extends Commands_Fx
     {
 
         public Type_HYBRID()
         {
-            super(System.out);
         }
 
         @Override public String consume(String argument)
@@ -135,13 +170,12 @@ public class stl_Commands
             throw new UnsupportedOperationException("Unimplemented method 'consume'");
         }
 
-        @Override public char[] sequence()
+        @Override public String sequence()
         {
-
-            throw new UnsupportedOperationException("Unimplemented method 'sequence'");
+            return "--";
         }
 
-        @Override public Commands_Type associated_type()
+        @Override public Commands_Type[] associated_types()
         {
 
             throw new UnsupportedOperationException("Unimplemented method 'associated_type'");
@@ -155,7 +189,6 @@ public class stl_Commands
 
         public Type_STATIC()
         {
-            super(System.out);
         }
 
         @Override public String consume(String argument)
@@ -164,13 +197,12 @@ public class stl_Commands
             throw new UnsupportedOperationException("Unimplemented method 'consume'");
         }
 
-        @Override public char[] sequence()
+        @Override public String sequence()
         {
-
-            throw new UnsupportedOperationException("Unimplemented method 'sequence'");
+            return "--";
         }
 
-        @Override public Commands_Type associated_type()
+        @Override public Commands_Type[] associated_types()
         {
 
             throw new UnsupportedOperationException("Unimplemented method 'associated_type'");
@@ -186,7 +218,7 @@ public class stl_Commands
                          // something like --variable=13
     }
 
-    private final Map< String, stl_Struct.struct_Pair< Commands_Type, stl_Callback< String, String > > > ARGUMENTS;
+    private final Map< String, stl_Commands.Commands_Fx > ARGUMENTS;
 
     public stl_Commands()
     {
@@ -194,20 +226,19 @@ public class stl_Commands
     }
 
     public stl_Commands(
-            Map< String, stl_Struct.struct_Pair< Commands_Type, stl_Callback< String, String > > > ARGUMENTS)
+            Map< String, stl_Commands.Commands_Fx > ARGUMENTS)
     {
         this.ARGUMENTS = ARGUMENTS;
     }
 
     public void add(String argumentName, Commands_Type type, stl_Callback< String, String > callback)
     {
-        ARGUMENTS.put(argumentName,
-                stl_Struct.make_pair(type == null ? Commands_Type.STATIC_CONSUMER : type, callback));
+        add(argumentName, new Type_INFORMATIONAL(callback.call((String) null)));
     }
 
-    public void add(String argumentName, stl_Callback< String, String > callback)
+    public void add(String argumentName, stl_Commands.Commands_Fx e)
     {
-        add(argumentName, null, callback);
+        this.ARGUMENTS.put(argumentName, e);
     }
 
     @Override public void run()

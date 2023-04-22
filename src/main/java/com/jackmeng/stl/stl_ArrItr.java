@@ -7,6 +7,12 @@ package com.jackmeng.stl;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A simple transformer class for turning a regular array into an Iteratable
+ * type via Iterator.
+ *
+ * @author Jack Meng
+ */
 public class stl_ArrItr< T >
         implements
         Iterator< T >
@@ -14,6 +20,10 @@ public class stl_ArrItr< T >
     private final T[] arr;
     private int i = 0;
 
+    /**
+     * @param arr
+     *            The target primitive array.
+     */
     public stl_ArrItr(T[] arr)
     {
         this.arr = arr;

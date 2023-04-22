@@ -15,7 +15,8 @@ public final class stl_Str
     public static String from_char_arr(char[] e)
     {
         StringBuilder sb = new StringBuilder();
-        for(char x : e) sb.append(x);
+        for (char x : e)
+            sb.append(x);
         return sb.toString();
     }
 

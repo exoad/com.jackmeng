@@ -23,7 +23,32 @@ public final class stl_Struct
         return new struct_Quad<>(first, middle1, middle2, last);
     }
 
-    public static final class struct_Pair< A, B >
+    public static < F, L, N > stl_Struct.struct_NamedPair< F, L, N > make_namedpair(F first, L last, N firstname,
+            N secondname)
+    {
+        return new struct_NamedPair<>(first, last, firstname, secondname);
+    }
+
+    public static final class struct_NamedPair< A, B, T >
+            extends struct_Pair< A, B >
+    {
+        public final T first_, second_;
+
+        public struct_NamedPair(A first, B second, T firstName, T secondName)
+        {
+            super(first, second);
+            this.first_ = firstName;
+            this.second_ = secondName;
+        }
+
+        @Override public String toString()
+        {
+            return super.toString() + first_ + "+" + second_;
+        }
+
+    }
+
+    public static class struct_Pair< A, B >
     {
         public final A first;
         public final B second;

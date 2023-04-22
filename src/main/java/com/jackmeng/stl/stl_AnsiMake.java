@@ -4,11 +4,27 @@
 
 package com.jackmeng.stl;
 
+/**
+ * A helper class with concatting multiple instances of
+ * {@link com.jackmeng.stl.stl_AnsiColors} to create a finalized colorized Ansi
+ * String.
+ *
+ * This AnsiMake is not very intuitive and requires a lot of verbosity to be used in order to create a <em>multicolored</em> string.
+ *
+ * For example, it is easy to create non changing colors with a single AnsiMake:
+ *
+ * @author Jack Meng
+ */
 public class stl_AnsiMake
 {
     private final Object[] payload;
     private final stl_AnsiColors[] colors;
 
+    /**
+     * Initializes with a set amount of colors to be appended.
+     * @param start
+     * @param payload
+     */
     public stl_AnsiMake(stl_AnsiColors[] start, Object[] payload)
     {
         this.colors = start;
