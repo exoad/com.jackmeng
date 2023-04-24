@@ -41,6 +41,8 @@ You can use JitPack:
 > }
 > ```
 
+You can also use via just downloading the JAR file via releases! However, this method requires you to manually resolve dependency issues and marginals.
+
 # Why?
 
 This library isn't meant to replace the entirety of the JavaSDK and it's Standard Library, instead more of an extension to it. It adds functions to simplify the implementation of bootstrap code.
