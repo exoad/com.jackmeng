@@ -38,6 +38,11 @@ public class stl_In
     });
   }
 
+  /**
+   * Reads a single token from the input.
+   * @param errorCallback
+   * @return
+   */
   public String next(stl_ErrCall errorCallback)
   {
     try
@@ -51,6 +56,11 @@ public class stl_In
     return st.toString();
   }
 
+  /**
+   * Reads an entire line
+   * @param errorCallback Provided custom error callback handler
+   * @return The String content that was read back
+   */
   public String nextln(stl_ErrCall errorCallback)
   {
     String x = "";
@@ -63,4 +73,13 @@ public class stl_In
     }
     return x;
   }
+
+  public String nextln()
+  {
+    return nextln(x -> {
+      x.printStackTrace();
+      return (Void) null;
+    });
+  }
+
 }

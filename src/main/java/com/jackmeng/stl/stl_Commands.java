@@ -11,7 +11,8 @@ import java.util.Map;
  */
 public class stl_Commands
         implements
-        Runnable
+        Runnable,
+        stl_Callback< String, String >
 {
     private abstract static class Commands_Fx
             implements stl_Callback< String, String >
@@ -218,7 +219,7 @@ public class stl_Commands
                          // something like --variable=13
     }
 
-    private final Map< String, stl_Commands.Commands_Fx > ARGUMENTS;
+    private final Map< String, ? super stl_Commands.Commands_Fx > ARGUMENTS;
 
     public stl_Commands()
     {
@@ -244,5 +245,10 @@ public class stl_Commands
     @Override public void run()
     {
 
+    }
+
+    @Override public String call(String arg)
+    {
+        return "";
     }
 }

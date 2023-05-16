@@ -22,4 +22,9 @@ public class stl_Wrap< T >
     {
         this.obj = obj;
     }
+
+    public synchronized void s_obj(T obj)
+    {
+        this.obj = obj;
+    }
 }

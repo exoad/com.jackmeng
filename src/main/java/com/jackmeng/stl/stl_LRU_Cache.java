@@ -14,14 +14,14 @@ public class stl_LRU_Cache< K, V >
   private final Map< K, Node< K, V > > map;
   private final Node< K, V > tail;
   private final int numColors;
+  // TODO: Change this to an AtomicReferenceArray instead of a primitive one.
   private final Node< K, V >[][] colorBlocks;
 
-  @SuppressWarnings("unchecked")
-  public stl_LRU_Cache(int capacity, int numColors, int blockSize)
+  @SuppressWarnings("unchecked") public stl_LRU_Cache(int capacity, int numColors, int blockSize)
   {
     this.capacity = capacity;
     this.map = new HashMap<>(capacity);
-    Node<K, V> head = new Node<>(null, null);
+    Node< K, V > head = new Node<>(null, null);
     this.tail = new Node<>(null, null);
     head.next = tail;
     tail.prev = head;
@@ -69,6 +69,7 @@ public class stl_LRU_Cache< K, V >
       addToFront(node, getColor(key));
     }
   }
+
   private void evict()
   {
     for (int i = 0; i < numColors; i++)
@@ -109,12 +110,13 @@ public class stl_LRU_Cache< K, V >
 
   private static class Node< K, V >
   {
-    K key;
-    V value;
-    Node< K, V > prev;
-    Node< K, V > next;
-    Node< K, V > prevBlock;
-    Node< K, V > nextBlock;
+    public K key;
+    public V value;
+    public Node< K, V > prev;
+    public Node< K, V > next;
+    // TODO: warning-unused
+    public Node< K, V > prevBlock;
+    public Node< K, V > nextBlock;
 
     Node(K key, V value)
     {

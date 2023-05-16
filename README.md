@@ -19,6 +19,8 @@ Latest Release: None
 
 # Using
 
+The `com.jackmeng` library follows a manifest to utilize **_zero_** third-party libraries and only requires the JDK's internal STL and using existing classes from the current library. This helps to reduce dependency conflicts, irrelevant depths, and legal issues (BSD-3). However, certain functionalities that are used as bootstrap for other elements in the library can be finalized (AKA `public final class`) or be completely package ghosts (AKA `class`). These limitations are minimized but aims to avoid end-users getting confused and potentially messing with unsafe code.
+
 You can use JitPack:
 
 > **Step 1.** Add the JitPack repository to your build file
