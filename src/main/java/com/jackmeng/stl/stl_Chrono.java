@@ -7,6 +7,11 @@ package com.jackmeng.stl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A standard utility class for manipulating time
+ *
+ * @author Jack Meng
+ */
 public final class stl_Chrono
 {
     public static String format_millis(String format)

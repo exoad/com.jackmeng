@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
    * If the +/- are not used, only that specific version can be used.
    *
    * <strong> IT IS HIGHLY RECOMMENDED TO STICK TO THIS PATTERN TO MAINTAIN
-   * MAINTAINABILITY
+   * MAINTAINABILITY</strong>
    *
    * @return String[]
    */

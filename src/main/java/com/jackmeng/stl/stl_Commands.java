@@ -23,8 +23,8 @@ public class stl_Commands
         /**
          * <p>
          * Constructs the necessary Command Function Object. There is also a separate
-         * constructor {@link #stl_Commands()} which inputs a null String as the default
-         * name <b>("DO NOT USE").
+         * constructor, which inputs a null String as the default
+         * name <strong>("DO NOT USE"). </strong>
          *
          * @param properName
          *            The properName is the string used in the real command argument. It

@@ -48,8 +48,6 @@ public class jlib_Point
    * There is no casting needed in that integer can be easily converted to a
    * double
    *
-   * @see java.lang.Integer.MIN_VALUE
-   * @see java.lang.Integer.MAX_VALUE
    * @see java.lang.Double
    * @param x
    *          X coordinate of a point (integer)
@@ -72,7 +70,7 @@ public class jlib_Point
    * However, the user should note that using the standard point class incontrast
    * with jlibxx's Point class can lead to problems such as
    *
-   * @link https://softwareengineering.stackexchange.com/questions/307616/how-to-deal-with-classes-having-the-same-name-different-packages
+   * <a href="https://softwareengineering.stackexchange.com/questions/307616/how-to-deal-with-classes-having-the-same-name-different-packages">...</a>
    *
    * @see java.awt.Point
    * @param point
@@ -151,7 +149,7 @@ public class jlib_Point
    * to return undefined
    * However, a forced infinity check returns NaN if the given is a vertical line
    *
-   * @code slope(4.3d, 5.0d);
+   * {@code slope(4.3d, 5.0d);}
    *
    *       @param x2 The second X-value to be compared with
    * @param y2
@@ -167,7 +165,7 @@ public class jlib_Point
    * This method performs a simple slope calculation between two points of type
    * double
    *
-   * @code slope(new Point(4, 3));
+   * {@code slope(new Point(4, 3));}
    *
    *       @param point A point type that will be parsed
    * @return The slope between the two points
@@ -183,7 +181,7 @@ public class jlib_Point
    * This method uses the distance formula of:
    * d = sqrt((x2 - x1)^2 + (y2 - y1)^2)
    *
-   * @code distance(3.7d, 9.8d);
+   * {@code distance(3.7d, 9.8d);}
    *
    *       @param x2
    * @param y2

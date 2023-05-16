@@ -112,7 +112,7 @@ public interface stl_type< T >
 
         /**
          * Generic Bitwise AND.
-         * Where it is "this & (param.value)"
+         * Where it is "this &#38; (param.value)"
          *
          * @param e
          *            The other type to be bitwise ANDed.
@@ -122,7 +122,7 @@ public interface stl_type< T >
 
         /**
          * Generic Bitwise Left Shift.
-         * Where it is "this << (param.value)"
+         * Where it is "this &#60;&#60; (param.value)"
          *
          * @param e
          *            The other type to left shift by.
@@ -132,7 +132,7 @@ public interface stl_type< T >
 
         /**
          * Generic Bitwise Right Shift.
-         * Where it is "this >> (param.value)"
+         * Where it is "this &#62;&#62; (param.value)"
          *
          * @param e
          *            The other type to right shift by.
@@ -142,7 +142,7 @@ public interface stl_type< T >
 
         /**
          * Generic Bitwise Right Shift.
-         * Where it is "this >>> (param.value)" with zero fill.
+         * Where it is "this &#62;&#62;&#62; (param.value)" with zero fill.
          *
          * Discarding bits and fill from the left with zeroes.
          *
