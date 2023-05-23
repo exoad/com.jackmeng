@@ -8,6 +8,61 @@ import java.util.*;
 
 public class stl_ListenerPool<T>
 {
+    public static class ListenerPool_Attached<T> extends stl_ListenerPool<T>
+    {
+        public enum Attached_States
+        {
+            ATTACHED, ADD_LISTENER, DETACHED, RMF_LISTENER;
+        }
+
+        private final List<stl_Listener<stl_Struct.struct_Pair<stl_Listener<T>, Attached_States>>> attachedListeners;
+        public ListenerPool_Attached(String poolName) {
+            super(poolName);
+            attachedListeners = new Vector<>(2);
+        }
+
+        public synchronized void attach(stl_Listener<stl_Struct.struct_Pair<stl_Listener<T>, Attached_States>> listener)
+        {
+            attachedListeners.add(listener);
+            listener.call(stl_Struct.make_pair(null, Attached_States.ATTACHED));
+        }
+
+        public synchronized void detach(stl_Listener<stl_Struct.struct_Pair<stl_Listener<T>, Attached_States>> listener)
+        {
+            if(attachedListeners.contains(listener))
+            {
+                attachedListeners.remove(listener);
+                listener.call(stl_Struct.make_pair(null, Attached_States.DETACHED));
+            }
+        }
+
+        @Override
+        public synchronized void add(stl_Listener<T> listener)
+        {
+            super.add(listener);
+            dispatch(stl_Struct.make_pair(listener, Attached_States.ADD_LISTENER));
+        }
+
+        @Override
+        public synchronized void rmf(stl_Listener<T> listener)
+        {
+            super.rmf(listener);
+            dispatch(stl_Struct.make_pair(listener, Attached_States.RMF_LISTENER));
+        }
+
+        private void dispatch(stl_Struct.struct_Pair<stl_Listener<T>, Attached_States> payload)
+        {
+            attachedListeners.forEach(x -> x.call(payload));
+        }
+
+        @Override
+        public synchronized void kill()
+        {
+            super.kill();
+            attachedListeners.clear();
+        }
+    }
+
     private String name;
     private final List<stl_Listener<T>> listeners;
 

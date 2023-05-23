@@ -28,5 +28,15 @@ public final class stl_Colors
                 Integer.valueOf(hex.substring(5, 7), 16));
     }
 
+    public static String RGBAtoHex(int alpha, int red, int green, int blue)
+    {
+        return String.format("#%02x%02x%02x%02x", alpha, red, green, blue);
+    }
+
+    public static Color awt_ColorInvert(Color r)
+    {
+        return new Color((255F - r.getRed()) / 255F, (255F - r.getGreen()) / 255F, (255F - r.getBlue()), r.getAlpha());
+    }
+
 
 }
