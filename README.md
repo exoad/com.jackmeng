@@ -12,11 +12,6 @@ in Java. Furthermore, it also provides utility for extending the original functi
 > **Notice** Documentation are only avaliable for certain things in the library and is not avaliable for everything!
 
 > Copyright (C) Jack Meng 2022-2023
-
-**Versioning**<br>
-Base Version: 0.0.1a (InDev)<br>
-Latest Release: None
-
 # Documentation
 
 You can view the documentation here: https://exoad.github.io/com.jackmeng/
