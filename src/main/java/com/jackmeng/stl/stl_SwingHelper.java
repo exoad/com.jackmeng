@@ -12,6 +12,7 @@ import com.jackmeng.stl.stl_Struct.struct_Pair;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,6 +116,20 @@ public final class stl_SwingHelper
         if (component instanceof Container)
             for (Component child : ((Container) component).getComponents())
                 traverseComponentHierarchy(child, componentNode, componentInfoMap);
+    }
+
+
+    public static java.util.List< Component > listComponents_OfContainer(Container c)
+    {
+        Component[] comps = c.getComponents();
+        java.util.List< Component > compList = new ArrayList<>();
+        for (Component comp : comps)
+        {
+            compList.add(comp);
+            if (comp instanceof Container)
+                compList.addAll(listComponents_OfContainer((Container) comp));
+        }
+        return compList;
     }
 
     private static String getComponentInfo(Component component)
