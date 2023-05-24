@@ -31,6 +31,8 @@ public interface stl
      * upload.
      */
     long STL_BASE = 2023_4_13L;
+    
+    long STL_RELEASE = 2023_5_24L;
 
     /**
      * Marks the allowed platforms this library is allowed or is most stable/tested
