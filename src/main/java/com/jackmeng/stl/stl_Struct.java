@@ -32,7 +32,7 @@ public final class stl_Struct
     public static final class struct_NamedPair< A, B, T >
             extends struct_Pair< A, B >
     {
-        public final T first_, second_;
+        public T first_, second_;
 
         public struct_NamedPair(A first, B second, T firstName, T secondName)
         {
@@ -50,8 +50,8 @@ public final class stl_Struct
 
     public static class struct_Pair< A, B >
     {
-        public final A first;
-        public final B second;
+        public A first;
+        public B second;
 
         public struct_Pair(A first, B second)
         {
@@ -99,9 +99,9 @@ public final class stl_Struct
 
     public static final class struct_Triple< A, B, C >
     {
-        public final A first;
-        public final B second;
-        public final C third;
+        public A first;
+        public B second;
+        public C third;
 
         public struct_Triple(A first, B second, C third)
         {
@@ -119,10 +119,10 @@ public final class stl_Struct
 
     public static final class struct_Quad< A, B, C, D >
     {
-        public final A first;
-        public final B second;
-        public final C third;
-        public final D fourth;
+        public A first;
+        public B second;
+        public C third;
+        public D fourth;
 
         public struct_Quad(A first, B second, C third, D fourth)
         {

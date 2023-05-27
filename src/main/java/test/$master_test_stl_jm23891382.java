@@ -132,5 +132,9 @@ final class $master_test_stl_jm23891382
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
         }
+
+        test_screen_size: {
+            System.out.println(stl_Ware.screen_Size().width + "," + stl_Ware.screen_Size().height);
+        }
     }
 }
