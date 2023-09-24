@@ -1,6 +1,6 @@
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Callback
+import kotlin.experimental.and
 import java.lang.Void
 import java.io.PrintWriter
 import java.io.File
@@ -22,28 +22,34 @@ object stl_Files
 	{
 		try
 		{
-			val pw=PrintWriter(fileName)
-			pw.print(content)
-			pw.flush()
-			pw.close()
+			val pw=fileName?.let { PrintWriter(it) }
+			if (pw!=null)
+			{
+				pw.print(content)
+				pw.flush()
+				pw.close()
+			}
 		} catch (e:Exception)
 		{
 			errorHandler.call(e)
 		}
 	}
 	
-	fun uri(fileName:String?):URI
+	fun uri(fileName:String?):URI?
 	{
-		return File(fileName).toPath().toUri()
+		return fileName?.let { File(it).toPath().toUri() }
 	}
 	
 	fun erasure_create_file(fileName:String? , errorHandler:stl_Callback<Void? , Exception?>)
 	{
-		val f=File(fileName)
-		if (f.exists()) f.delete()
+		val f=fileName?.let { File(it) }
+		if (f!=null)
+		{
+			if (f.exists()) f.delete()
+		}
 		try
 		{
-			f.createNewFile()
+			f?.createNewFile()
 		} catch (e:Exception)
 		{
 			errorHandler.call(e)
@@ -54,10 +60,13 @@ object stl_Files
 	{
 		try
 		{
-			val pw=PrintWriter(fileName)
-			pw.append(content)
-			pw.flush()
-			pw.close()
+			val pw=fileName?.let { PrintWriter(it) }
+			if (pw!=null)
+			{
+				pw.append(content)
+				pw.flush()
+				pw.close()
+			}
 		} catch (e:Exception)
 		{
 			errorHandler.call(e)
@@ -77,7 +86,8 @@ object stl_Files
 	{
 		try
 		{
-			BufferedReader(FileReader(fileName)).use { br-> while (br.ready()) consumer.call(br.readLine()) }
+			fileName?.let { FileReader(it) }
+				?.let { BufferedReader(it).use { br-> while (br.ready()) consumer.call(br.readLine()) } }
 		} catch (e:Exception)
 		{
 			errorHandler.call(e)
@@ -97,10 +107,12 @@ object stl_Files
 	{
 		try
 		{
-			BufferedReader(FileReader(fileName)).use { br->
-				while (br.ready()) consumer.call(
-					(br.read().toByte() and 0xFF).toByte()
-				)
+			fileName?.let { FileReader(it) }?.let {
+				BufferedReader(it).use { br->
+					while (br.ready()) consumer.call(
+						(br.read().toByte() and 0xFF.toByte())
+					)
+				}
 			}
 		} catch (e:Exception)
 		{

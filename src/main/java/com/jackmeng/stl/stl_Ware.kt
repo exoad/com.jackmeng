@@ -1,6 +1,5 @@
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Ware
 import java.awt.*
 import java.util.*
 
@@ -32,7 +31,8 @@ object stl_Ware
 		r?.mouseMove(x , y)
 	}
 	
-	fun screen_Size():Dimension
+	@JvmStatic
+    fun screen_Size():Dimension
 	{
 		return Toolkit.getDefaultToolkit().screenSize
 	}
@@ -55,7 +55,7 @@ object stl_Ware
 	 * @param y Screen Y
 	 * @return
 	 */
-	fun screen_colorAt(x:Int , y:Int):Optional<Color?>
+	fun screen_colorAt(x:Int , y:Int):Optional<Color>
 	{
 		var r:Robot?=null
 		try
@@ -65,12 +65,12 @@ object stl_Ware
 		{
 			e.printStackTrace()
 		}
-		var color:Optional<Color?>=Optional.empty()
-		if (r!=null) color=Optional.of(r.getPixelColor(x , y))
+		var color:Optional<Color> =Optional.empty()
+		if (r!=null) color =Optional.of(r.getPixelColor(x , y))
 		return color
 	}
 	
-	fun screen_colorAt_Rnd():Optional<Color?>
+	fun screen_colorAt_Rnd():Optional<Color>
 	{
 		return screen_colorAt(`$00_rng`.nextInt(screen_Size().width) , `$00_rng`.nextInt(screen_Size().height))
 	}

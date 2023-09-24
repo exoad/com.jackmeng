@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Maths
+import kotlin.math.pow
 
 class stl_Bezier(private val controlPoints:List<Double> , private val degree:Int)
 {
@@ -13,10 +13,7 @@ class stl_Bezier(private val controlPoints:List<Double> , private val degree:Int
 		for (i in 0..degree)
 		{
 			val controlPoint=controlPoints[i]
-			val coefficient=(stl_Maths.binomial_coefficient(degree , i)*Math.pow(1-t , degree.toDouble()-i)*Math.pow(
-				t ,
-				i.toDouble()
-			))
+			val coefficient=(stl_Maths.binomial_coefficient(degree , i)*(1-t).pow(degree.toDouble()-i)*t.pow(i.toDouble()))
 			result+=controlPoint*coefficient
 		}
 		return result

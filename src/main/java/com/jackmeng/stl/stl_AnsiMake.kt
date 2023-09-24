@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_AnsiColors
 import java.lang.StringBuilder
 
 /**

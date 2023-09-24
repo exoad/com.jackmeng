@@ -3,14 +3,13 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Callback
 import java.lang.Void
 
 interface stl_ListenerDeployable<A>:stl_Callback<Void? , Iterable<A>?>
 {
-	override fun call(e:Iterable<A>):Void
+	override fun call(arg:Iterable<A>?):Void?
 	{
-		return null as Void
+		return null
 	}
 	
 	fun empty(length:Int)

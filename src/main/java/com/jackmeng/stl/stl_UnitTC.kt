@@ -3,10 +3,8 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Callback
+import kotlin.math.abs
 import java.lang.Runnable
-import com.jackmeng.stl.stl_AnsiMake
-import com.jackmeng.stl.stl_AnsiColors
 import java.lang.Exception
 
 class stl_UnitTC(private val name:String , private val action:stl_Callback<* , *>):Runnable
@@ -29,8 +27,7 @@ class stl_UnitTC(private val name:String , private val action:stl_Callback<* , *
 		val s=(Runtime.getRuntime().maxMemory()-((Runtime.getRuntime().totalMemory()-Runtime.getRuntime()
 			.freeMemory())/1024/1024))
 		val l=System.currentTimeMillis()
-		val returns:Any
-		returns=try
+		val returns:Any=try
 		{
 			action.call(null)
 		} catch (e:Exception)
@@ -50,7 +47,7 @@ class stl_UnitTC(private val name:String , private val action:stl_Callback<* , *
 			"""
 	Finished in: ${t}ms
 	Memory used: 
-	""".trimIndent()+Math.abs(
+	""".trimIndent()+abs(
 				(Runtime.getRuntime().maxMemory()-((Runtime.getRuntime().totalMemory().toDouble()-Runtime.getRuntime()
 					.freeMemory())/1024/1024))-s
 			)+" Mb"+if (expects==null) "\nCase Status: "+stl_AnsiMake(

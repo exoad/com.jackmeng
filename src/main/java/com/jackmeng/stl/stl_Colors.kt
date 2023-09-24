@@ -5,8 +5,6 @@ package com.jackmeng.stl
 
 import java.awt.Color
 import java.util.Optional
-import com.jackmeng.stl.stl_Struct.struct_Quad
-import com.jackmeng.stl.stl_Struct
 
 object stl_Colors
 {
@@ -39,7 +37,7 @@ object stl_Colors
 	
 	fun averageOf(vararg colors:Color):Optional<Color>
 	{
-		if (colors==null||colors.size==0) return Optional.empty()
+		if (colors.isEmpty()) return Optional.empty()
 		else if (colors.size==1) return Optional.of(
 			colors[0]
 		)

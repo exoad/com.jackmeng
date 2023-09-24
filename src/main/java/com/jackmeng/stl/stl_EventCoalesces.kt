@@ -11,11 +11,11 @@ import javax.swing.Timer
 
 class stl_EventCoalesces(delay:Int , lambda:Runnable):Runnable
 {
-	private val timer:Timer
+	private lateinit var timer:Timer
 	
 	init
 	{
-		timer=Timer(delay) { e:ActionEvent?->
+		timer=Timer(delay) {
 			timer.stop()
 			lambda.run()
 		}

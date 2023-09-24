@@ -3,9 +3,7 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import com.jackmeng.stl.stl0
 import kotlin.Throws
 import java.lang.ClassNotFoundException
 import java.util.*
@@ -15,26 +13,31 @@ import java.util.*
  */
 internal class stl0 private constructor()
 {
-	val EXECS=Executors.newFixedThreadPool(8)
+	@JvmField
+    val EXECS=Executors.newFixedThreadPool(8)
 	
 	companion object
 	{
-		val INTERNAL=stl0()
-		val STL_TIMER0=Timer("STL_TIMER00_com.jackmeng")
+		@JvmField
+        val INTERNAL=stl0()
+		@JvmField
+        val STL_TIMER0=Timer("STL_TIMER00_com.jackmeng")
 		@Throws(ClassNotFoundException::class)
 		fun isGeneric(str:String?):Boolean
 		{
-			return Class.forName(str).typeParameters.size>0
+			return Class.forName(str).typeParameters.isNotEmpty()
 		}
 		
-		fun dirm():String
+		@JvmStatic
+        fun dirm():String
 		{
 			return System.getProperty("file.separator")
 		}
 		
-		fun isGeneric(e:Class<*>):Boolean
+		@JvmStatic
+        fun isGeneric(e:Class<*>):Boolean
 		{
-			return e.typeParameters.size>0
+			return e.typeParameters.isNotEmpty()
 		}
 	}
 }

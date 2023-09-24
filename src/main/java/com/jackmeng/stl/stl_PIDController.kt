@@ -3,6 +3,8 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
+import kotlin.math.abs
+
 class stl_PIDController(private val P:Double , private val I:Double , private val D:Double)
 {
 	private var setpoint=0.0
@@ -85,12 +87,12 @@ class stl_PIDController(private val P:Double , private val I:Double , private va
 			firstRun=false
 		}
 		var error=setpoint-processVariable
-		if (Math.abs(error)<deadband) error=0.0
+		if (abs(error)<deadband) error=0.0
 		errorSum+=error*dt
-		errorSum=Math.min(errorSum , maxErrorSum)
+		errorSum=errorSum.coerceAtMost(maxErrorSum)
 		val dError=(error-lastError)/dt
 		var output=P*error+I*errorSum+D*dError
-		output=Math.max(Math.min(output , maxOutput) , minOutput)
+		output=output.coerceAtMost(maxOutput).coerceAtLeast(minOutput)
 		lastError=error
 		lastTime=time
 		checkOnTarget(error)
@@ -99,7 +101,7 @@ class stl_PIDController(private val P:Double , private val I:Double , private va
 	
 	private fun checkOnTarget(error:Double)
 	{
-		if (Math.abs(error)<onTargetError)
+		if (abs(error)<onTargetError)
 		{
 			onTargetCount++
 			if (onTargetCount>=onTargetCountMax) isOnTarget=true

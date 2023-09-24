@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_AssetFetcher.assetfetcher_FetcherStyle
 import javax.swing.ImageIcon
 import java.lang.NullPointerException
 import java.awt.image.BufferedImage
@@ -36,8 +35,7 @@ class stl_AssetFetcher(style:assetfetcher_FetcherStyle)
 	fun image_icon(path:String):ImageIcon?
 	{
 		if (lazyResource_cache.containsKey(path)&&lazyResource_cache[path] is ImageIcon) return lazyResource_cache[path] as ImageIcon?
-		val i:ImageIcon
-		i=try
+		val i:ImageIcon=try
 		{
 			ImageIcon(
 				Objects.requireNonNull(javaClass.getResource(path))
@@ -53,8 +51,7 @@ class stl_AssetFetcher(style:assetfetcher_FetcherStyle)
 	fun image(path:String):BufferedImage?
 	{
 		if (lazyResource_cache.containsKey(path)&&lazyResource_cache[path] is BufferedImage) return lazyResource_cache[path] as BufferedImage?
-		val i:BufferedImage
-		i=try
+		val i:BufferedImage=try
 		{
 			ImageIO.read(Objects.requireNonNull(javaClass.getResource(path)))
 		} catch (e:Exception)
@@ -78,8 +75,7 @@ class stl_AssetFetcher(style:assetfetcher_FetcherStyle)
 	fun file(path:String):File?
 	{
 		if (lazyResource_cache.containsKey(path)) return lazyResource_cache[path] as File?
-		val i:File
-		i=try
+		val i:File=try
 		{
 			File(
 				Objects.requireNonNull(javaClass.getResource(path)).file

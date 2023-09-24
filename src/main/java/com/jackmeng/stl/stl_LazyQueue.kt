@@ -7,8 +7,8 @@ import java.util.*
 
 class stl_LazyQueue<T>
 {
-	private val queue:Queue<T>=LinkedList()
-	private val lazyQueue:Queue<T>=LinkedList()
+	private val queue:Queue<T> =LinkedList()
+	private val lazyQueue:Queue<T> =LinkedList()
 	fun enqueue(item:T)
 	{
 		lazyQueue.add(item)

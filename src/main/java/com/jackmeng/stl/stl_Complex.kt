@@ -3,7 +3,9 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Complex
+import kotlin.math.cosh
+import kotlin.math.hypot
+import kotlin.math.sinh
 import java.util.Objects
 
 class stl_Complex(private var real:Double , private var imaginary:Double)
@@ -68,13 +70,13 @@ class stl_Complex(private var real:Double , private var imaginary:Double)
 	
 	fun abs():Double
 	{
-		return Math.hypot(imaginary , real)
+		return hypot(imaginary , real)
 	}
 	
 	fun sin():stl_Complex
 	{
 		return stl_Complex(
-			Math.sin(real)*Math.cosh(imaginary) , Math.cos(real)*Math.sinh(
+			kotlin.math.sin(real)*cosh(imaginary) , kotlin.math.cos(real)*sinh(
 				imaginary
 			)
 		)
@@ -83,7 +85,7 @@ class stl_Complex(private var real:Double , private var imaginary:Double)
 	fun cos():stl_Complex
 	{
 		return stl_Complex(
-			Math.cos(real)*Math.cosh(imaginary) , -Math.sin(real)*Math.sinh(
+			kotlin.math.cos(real)*cosh(imaginary) , -kotlin.math.sin(real)*sinh(
 				imaginary
 			)
 		)

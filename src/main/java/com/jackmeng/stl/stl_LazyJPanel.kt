@@ -9,7 +9,7 @@ import kotlin.jvm.Synchronized
 
 abstract class stl_LazyJPanel protected constructor():JPanel()
 {
-	protected var construction=false
+	private var construction=false
 	protected val finished=true
 	protected abstract fun constr()
 	override fun paint(g:Graphics)

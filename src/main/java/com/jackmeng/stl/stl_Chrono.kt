@@ -15,17 +15,18 @@ import java.util.*
  */
 object stl_Chrono
 {
-	@JvmOverloads
-	fun format_millis(format:String?="MM_dd_YYYY__HH_mm_ss"):String
+	@JvmStatic
+    @JvmOverloads
+	fun format_millis(format:String?="MM_dd_YYYY__HH_mm_ss"):String?
 	{
 		return format_time(
 			format , System.currentTimeMillis()
 		)
 	}
 	
-	fun format_time(format:String? , t:Long):String
+	fun format_time(format:String? , t:Long):String?
 	{
 		val e=Date(t)
-		return SimpleDateFormat(format).format(e)
+		return format?.let { SimpleDateFormat(it).format(e) }
 	}
 }

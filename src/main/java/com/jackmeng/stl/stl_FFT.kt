@@ -3,12 +3,8 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Complex.plus
-import com.jackmeng.stl.stl_Complex.times
-import com.jackmeng.stl.stl_Complex.minus
-import com.jackmeng.stl.stl_Complex
-import java.lang.IllegalArgumentException
-import com.jackmeng.stl.stl_FFT
+import kotlin.math.cos
+import kotlin.math.sin
 
 object stl_FFT
 {
@@ -26,7 +22,7 @@ object stl_FFT
 		for (k in 0 until n/2)
 		{
 			val kth=-2*k*Math.PI/n
-			val wk=stl_Complex(Math.cos(kth) , Math.sin(kth))
+			val wk=stl_Complex(cos(kth) , sin(kth))
 			y[k]=q[k]!!.plus(wk.times(r[k]!!))
 			y[k+n/2]=q[k]!!.minus(wk.times(r[k]!!))
 		}

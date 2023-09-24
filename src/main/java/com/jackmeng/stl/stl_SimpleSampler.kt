@@ -3,13 +3,11 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Callback
 import java.lang.Void
 import kotlin.Throws
 import java.io.IOException
 import java.io.BufferedReader
 import java.io.FileReader
-import com.jackmeng.stl.stl_SimpleSampler
 import java.util.function.Consumer
 
 class stl_SimpleSampler<T>(private val sampleRate:Int , private val callback:stl_Callback<Void , T>):Consumer<T>
@@ -26,10 +24,12 @@ class stl_SimpleSampler<T>(private val sampleRate:Int , private val callback:stl
 		@Throws(IOException::class)
 		fun sampleFile(filePath:String? , sampleRate:Int , callback:stl_Callback<Void , String>)
 		{
-			BufferedReader(FileReader(filePath)).use { reader->
-				val sampler=stl_SimpleSampler(sampleRate , callback)
-				var line:String
-				while (reader.readLine().also { line=it }!=null) sampler.accept(line)
+			filePath?.let { FileReader(it) }?.let { it->
+				BufferedReader(it).use { reader->
+					val sampler=stl_SimpleSampler(sampleRate , callback)
+					var line:String
+					while (reader.readLine().also { line=it }!=null) sampler.accept(line)
+				}
 			}
 		}
 	}

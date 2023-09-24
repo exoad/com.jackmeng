@@ -3,7 +3,11 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Vector2f
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
+
 
 class stl_Vector2f
 {
@@ -44,7 +48,7 @@ class stl_Vector2f
 	
 	fun mag():Float
 	{
-		return Math.sqrt((x*x+y*y).toDouble()).toFloat()
+		return sqrt((x*x+y*y).toDouble()).toFloat()
 	}
 	
 	fun dot(e:stl_Vector2f):Float
@@ -59,7 +63,7 @@ class stl_Vector2f
 	
 	fun dist(e:stl_Vector2f):Float
 	{
-		return Math.sqrt(((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y)).toDouble()).toFloat()
+		return sqrt(((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y)).toDouble()).toFloat()
 	}
 	
 	fun norm():stl_Vector2f
@@ -69,21 +73,21 @@ class stl_Vector2f
 	
 	fun theta():Float
 	{
-		return Math.atan2(y.toDouble() , x.toDouble()).toFloat()
+		return atan2(y.toDouble() , x.toDouble()).toFloat()
 	}
 	
 	fun rot0(theta:Float):stl_Vector2f
 	{
 		return stl_Vector2f(
-			(x*Math.cos(theta.toDouble())-y*Math.sin(theta.toDouble())).toFloat() ,
-			(x*Math.sin(theta.toDouble())+y*Math.cos(theta.toDouble())).toFloat()
+			(x*cos(theta.toDouble())-y*sin(theta.toDouble())).toFloat() ,
+			(x*sin(theta.toDouble())+y*cos(theta.toDouble())).toFloat()
 		)
 	}
 	
 	fun rot1(theta:Float)
 	{
-		x=(x*Math.cos(theta.toDouble())-y*Math.sin(theta.toDouble())).toFloat()
-		y=(x*Math.sin(theta.toDouble())+y*Math.cos(theta.toDouble())).toFloat()
+		x=(x*cos(theta.toDouble())-y*sin(theta.toDouble())).toFloat()
+		y=(x*sin(theta.toDouble())+y*cos(theta.toDouble())).toFloat()
 	}
 	
 	fun lerp(vec:stl_Vector2f , a:Float):stl_Vector2f

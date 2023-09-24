@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_SimpleCache.CleanupTask
 import java.util.*
 
 class stl_SimpleCache<K , V>(timeoutMillis:Long , toleranceMillis:Long)
@@ -42,12 +41,8 @@ class stl_SimpleCache<K , V>(timeoutMillis:Long , toleranceMillis:Long)
 	
 	private inner class CacheEntry<T> internal constructor(val value:T)
 	{
-		var lastAccessTimeMillis:Long
+		var lastAccessTimeMillis:Long=System.currentTimeMillis()
 		
-		init
-		{
-			lastAccessTimeMillis=System.currentTimeMillis()
-		}
 	}
 	
 	private inner class CleanupTask:TimerTask()

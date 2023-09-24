@@ -8,7 +8,7 @@ import java.util.function.Function
 
 class stl_OutputCache<I , O>(private val function:Function<I , O>)
 {
-	private val cache:MutableMap<I , O?>=HashMap()
+	private val cache:MutableMap<I , O?> =HashMap()
 	operator fun get(input:I):O?
 	{
 		var output=cache[input]

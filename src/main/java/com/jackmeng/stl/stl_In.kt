@@ -5,8 +5,6 @@ import java.io.BufferedReader
 import java.util.StringTokenizer
 import kotlin.jvm.Synchronized
 import kotlin.jvm.JvmOverloads
-import com.jackmeng.stl.stl_ErrCall
-import java.lang.Void
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -44,7 +42,7 @@ class stl_In(e:InputStream?)
 	fun next(
 			errorCallback:stl_ErrCall=stl_ErrCall { x:Exception->
 				x.printStackTrace()
-				null as Void?
+				null
 			}
 	):String
 	{
@@ -64,12 +62,7 @@ class stl_In(e:InputStream?)
 	 * @return The String content that was read back
 	 */
 	@JvmOverloads
-	fun nextln(
-			errorCallback:stl_ErrCall?=stl_ErrCall { x:Exception->
-				x.printStackTrace()
-				null as Void?
-			}
-	):String
+	fun nextln():String
 	{
 		var x=""
 		try

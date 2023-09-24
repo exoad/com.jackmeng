@@ -4,8 +4,6 @@
 package com.jackmeng.stl
 
 import kotlin.jvm.JvmOverloads
-import com.jackmeng.stl.stl_CircularBuffer
-import com.jackmeng.stl.stl_Callback
 import java.lang.Void
 import java.nio.ByteBuffer
 
@@ -56,8 +54,11 @@ class stl_CircularBuffer @JvmOverloads constructor(init_Size:Int=255)
 			val off_set=offset()
 			val a=free(off_set)
 			if (a==0) break
-			val copy=Math.min(rem , a)
-			System.arraycopy(data , off , buffer , off_set , copy)
+			val copy=rem.coerceAtMost(a)
+			if (data!=null)
+			{
+				System.arraycopy(data , off , buffer , off_set , copy)
+			}
 			next(copy)
 			rem-=copy
 			off+=copy
@@ -80,8 +81,11 @@ class stl_CircularBuffer @JvmOverloads constructor(init_Size:Int=255)
 			val off_set=offset()
 			val a=free(off_set)
 			if (a==0) break
-			val copy=Math.min(rem , a)
-			System.arraycopy(data , off , buffer , off_set , copy)
+			val copy=rem.coerceAtMost(a)
+			if (data!=null)
+			{
+				System.arraycopy(data , off , buffer , off_set , copy)
+			}
 			next(copy)
 			rem-=copy
 			off+=copy
@@ -123,19 +127,19 @@ class stl_CircularBuffer @JvmOverloads constructor(init_Size:Int=255)
 		{
 			return 0
 		}
-		var read=Math.min(len , sz)
+		var read=len.coerceAtMost(sz)
 		val offset=offset()
 		val f1=start
 		var f1_sz=buffer.size-start
 		if (f1_sz>sz) f1_sz=sz
 		if (f1_sz>=read) f1_sz=read
-		System.arraycopy(data , f1 , data , i , f1_sz)
+		if (data!=null) System.arraycopy(data , f1 , data , i , f1_sz)
 		read-=f1_sz
 		if (read==0) return f1_sz
 		val f2=if (offset<=start) 0 else sz
 		var f2_sz=buffer.size-f1_sz
 		if (f2_sz>=read) f2_sz=read
-		System.arraycopy(data , f2 , data , i+f1_sz , f2_sz)
+		if (data!=null) System.arraycopy(data , f2 , data , i+f1_sz , f2_sz)
 		read-=f2_sz
 		return len-read
 	}

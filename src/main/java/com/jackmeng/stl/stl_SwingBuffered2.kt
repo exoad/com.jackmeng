@@ -16,8 +16,6 @@ class stl_SwingBuffered2(width:Int , height:Int)
 	private var isDirty=true
 	
 	constructor(component:JComponent):this(component.width , component.height)
-	{
-	}
 	
 	init
 	{

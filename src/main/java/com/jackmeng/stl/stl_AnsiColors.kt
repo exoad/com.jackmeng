@@ -3,8 +3,6 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_AnsiColors
-
 /**
  * A constant enum for defining all common Ansi Colors and the ability to make
  * custom ones. This class is used in conjunction with
@@ -72,7 +70,7 @@ enum class stl_AnsiColors(private val color:String)
 		 */
 		fun construct(id:Int):String
 		{
-			return if (id>=0&&id<=255) "\u001b[38;5;"+id+"m" else WHITE_TXT.color
+			return if (id in 0..255) "\u001b[38;5;"+id+"m" else WHITE_TXT.color
 		}
 	}
 }

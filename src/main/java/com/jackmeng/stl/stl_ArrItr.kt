@@ -6,12 +6,12 @@ package com.jackmeng.stl
 import java.util.NoSuchElementException
 
 /**
- * A simple transformer class for turning a regular array into an Iteratable
+ * A simple transformer class for turning a regular array into an Iterable
  * type via Iterator.
  *
  * @author Jack Meng
  */
-class stl_ArrItr<T>
+abstract class stl_ArrItr<T>
 /**
  * @param arr
  * The target primitive array.

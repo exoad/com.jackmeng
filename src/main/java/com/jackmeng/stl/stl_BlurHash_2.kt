@@ -4,6 +4,7 @@
 package com.jackmeng.stl
 
 import com.jackmeng.stl.stl_BlurHash_2
+import kotlin.math.*
 import java.awt.Color
 import java.math.BigInteger
 import java.lang.StringBuilder
@@ -29,8 +30,8 @@ object stl_BlurHash_2
 				{
 					for (i in 0 until width)
 					{
-						val s=(if (x==0) 1 else 2)*Math.cos(Math.PI*i/width)
-						val t=(if (y==0) 1 else 2)*Math.cos(Math.PI*j/height)
+						val s=(if (x==0) 1 else 2)*cos(Math.PI*i/width)
+						val t=(if (y==0) 1 else 2)*cos(Math.PI*j/height)
 						val factor=s*t/width/height
 						val pixelIndex=j*width+i
 						val c=Color(pixels[pixelIndex] , true)
@@ -39,9 +40,9 @@ object stl_BlurHash_2
 						bAcc+=factor*c.blue
 					}
 				}
-				val r=Math.round(rAcc).toInt()
-				val g=Math.round(gAcc).toInt()
-				val b=Math.round(bAcc).toInt()
+				val r=rAcc.roundToInt()
+				val g=gAcc.roundToInt()
+				val b=bAcc.roundToInt()
 				colors[index]=packColor(r , g , b)
 			}
 		}
@@ -84,10 +85,10 @@ object stl_BlurHash_2
 	
 	private fun getSize(componentX:Int , componentY:Int):IntArray
 	{
-		val maxDimension=Math.max(componentX , componentY)
-		val smallDimension=Math.min(componentX , componentY)
-		val x=Math.ceil(Math.sqrt(maxDimension*smallDimension.toDouble())).toInt()
-		val y=Math.ceil(maxDimension.toDouble()*smallDimension/x).toInt()
+		val maxDimension=componentX.coerceAtLeast(componentY)
+		val smallDimension=componentX.coerceAtMost(componentY)
+		val x=ceil(sqrt(maxDimension*smallDimension.toDouble())).toInt()
+		val y=ceil(maxDimension.toDouble()*smallDimension/x).toInt()
 		return intArrayOf(x , y)
 	}
 	
@@ -95,10 +96,10 @@ object stl_BlurHash_2
 	{
 		val numComponents=colorCoords.size
 		val sizeFlag=
-			Math.max(0.0 , Math.min(9.0 , Math.floor(Math.log(width.toDouble())/Math.log(2.0)-1))).toInt()+Math.max(
-				0.0 , Math.min(
-					9.0 , Math.floor(
-						Math.log(height.toDouble())/Math.log(2.0)-1
+			0.0.coerceAtLeast(9.0.coerceAtMost(floor(ln(width.toDouble())/ln(2.0)-1))).toInt()+0.0.coerceAtLeast(
+				9.0.coerceAtMost(
+					floor(
+						ln(height.toDouble())/ln(2.0)-1
 					)
 				)
 			).toInt()*9
@@ -108,8 +109,8 @@ object stl_BlurHash_2
 		{
 			val value=colorValues[i]
 			val coords=colorCoords[i]
-			val quantizedX=Math.max(0.0 , Math.min(18.0 , Math.floor(coords[0]*19))).toInt()
-			val quantizedY=Math.max(0.0 , Math.min(18.0 , Math.floor(coords[1]*19))).toInt()
+			val quantizedX=0.0.coerceAtLeast(18.0.coerceAtMost(floor(coords[0]*19))).toInt()
+			val quantizedY=0.0.coerceAtLeast(18.0.coerceAtMost(floor(coords[1]*19))).toInt()
 			val quantized=quantizedY*19+quantizedX
 			builder.append(getBase83(quantized , 1))
 			builder.append(getBase83(value!!.toInt() , 4))

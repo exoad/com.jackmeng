@@ -20,7 +20,7 @@ class stl_ControlledJPanel(private var fps:Int):JPanel()
 	private var executor:ScheduledExecutorService
 	
 	@Transient
-	private val fpsListeners:MutableList<Consumer<Float>>=ArrayList()
+	private val fpsListeners:MutableList<Consumer<Float>> =ArrayList()
 	
 	@Transient
 	private var scheduledFuture:ScheduledFuture<*>

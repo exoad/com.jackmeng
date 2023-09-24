@@ -4,18 +4,14 @@
 package com.jackmeng.stl
 
 import kotlin.jvm.JvmOverloads
-import com.jackmeng.stl.stl_CircularBuffer
 import javax.sound.sampled.SourceDataLine
 import kotlin.Throws
 import java.io.IOException
 import javax.sound.sampled.LineUnavailableException
 import javax.sound.sampled.UnsupportedAudioFileException
 import java.io.File
-import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
-import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.DataLine
-import java.lang.Runnable
 
 class stl_SNDCircular @JvmOverloads constructor(private val buffer_size:Int=1024 , private val buffer:stl_CircularBuffer=stl_CircularBuffer())
 {

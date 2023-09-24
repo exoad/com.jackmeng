@@ -4,16 +4,8 @@
 package com.jackmeng.stl
 
 import java.lang.Runnable
-import com.jackmeng.stl.stl0
-import com.jackmeng.stl.stl_Callback
 import java.lang.Void
 import com.jackmeng.stl.types.Null_t
-import java.util.concurrent.Callable
-import com.jackmeng.stl.stl_Str
-import com.jackmeng.stl.stl_Commons
-import com.jackmeng.stl.stl_ArrItr
-import com.jackmeng.stl.stl_Commons.SysArch
-import com.jackmeng.stl.stl_Listener
 import java.util.function.Consumer
 
 object stl_Commons
@@ -109,7 +101,10 @@ object stl_Commons
 	
 	fun async(task:Runnable?)
 	{
-		stl0.INTERNAL.EXECS.submit(task)
+		if (task!=null)
+		{
+			stl0.INTERNAL.EXECS.submit(task)
+		}
 	}
 	
 	fun async(task:stl_Callback<Void? , out Null_t?>)
@@ -163,7 +158,7 @@ object stl_Commons
 	{
 		return object:stl_Listener<T>
 		{
-			override fun call(e:T):Void
+			override fun call(e:T):Void?
 			{
 				consume.accept(e)
 				return null
@@ -171,7 +166,8 @@ object stl_Commons
 		}
 	}
 	
-	fun tmpdir():String
+	@JvmStatic
+    fun tmpdir():String
 	{
 		return System.getProperty("java.io.tmpdir")
 	}

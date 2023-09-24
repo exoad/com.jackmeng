@@ -4,7 +4,6 @@
 package com.jackmeng.stl
 
 import java.lang.FunctionalInterface
-import com.jackmeng.stl.stl_Callback
 import java.lang.Void
 
 @FunctionalInterface

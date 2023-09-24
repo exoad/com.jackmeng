@@ -5,10 +5,6 @@ package com.jackmeng.stl
 
 import java.awt.Image
 import java.awt.image.BufferedImage
-import java.awt.Graphics
-import com.jackmeng.stl.stl_Images
-import com.jackmeng.stl.stl_SwingHelper
-import java.awt.Graphics2D
 import java.awt.RenderingHints
 import java.awt.image.Kernel
 import java.awt.image.ConvolveOp

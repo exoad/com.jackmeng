@@ -11,11 +11,7 @@ import java.io.File
 import java.util.Stack
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
-import com.jackmeng.stl.stl0
-import com.jackmeng.stl.stl_Chrono
-import com.jackmeng.stl.stl_Commons
 import kotlin.jvm.Synchronized
-import com.jackmeng.stl.stl_Str
 import java.io.IOException
 import java.io.Serializable
 import java.util.TimerTask
@@ -37,7 +33,7 @@ class stl_Logger(private val name:String , private val saveLocation:String , pri
 		DROP_ALL , KEEP_ALL , CACHE_OLD
 	}
 	
-	private val file:File
+	private val file:File=File(saveLocation+dirm()+name+"_"+format_millis()+".log")
 	private val logs=Stack<String>()
 	private var running=false
 	private var enabled=true
@@ -55,13 +51,10 @@ class stl_Logger(private val name:String , private val saveLocation:String , pri
 	//private Logger_DisableBehavior disableBehavior = Logger_DisableBehavior.KEEP_ALL;
 	init
 	{
-		file=File(saveLocation+dirm()+name+"_"+format_millis()+".log")
 		afterRoutine=ArrayList(10)
 	}
 	
 	constructor(loggerName:String , save_time:Long):this(loggerName , tmpdir() , save_time)
-	{
-	}
 	
 	// public Logger_DisableBehavior disableBehavior()
 	// {
@@ -94,8 +87,6 @@ class stl_Logger(private val name:String , private val saveLocation:String , pri
 	}
 	
 	constructor(loggerName:String , saveLocation:String):this(loggerName , saveLocation , 4000L)
-	{
-	}
 	
 	@Synchronized
 	fun push(contents:Any)

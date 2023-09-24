@@ -3,12 +3,11 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import java.awt.Color
+import javax.swing.JTree
 import javax.swing.border.Border
-import com.jackmeng.stl.stl_SwingHelper.``$rr_corner_border_01`
-import java.awt.Component
-import java.awt.Container
-import java.util.ArrayList
+import javax.swing.tree.DefaultMutableTreeNode
+import java.awt.*
+import java.awt.geom.RoundRectangle2D
 
 object stl_SwingHelper
 {
@@ -19,33 +18,35 @@ object stl_SwingHelper
 	
 	fun rrect_clip(x:Int , y:Int , arc_w:Int , arc_h:Int , w:Int , h:Int):Shape
 	{
-		return RoundRectangle2D.Float(x , y , w , h , arc_w , arc_h)
+		return RoundRectangle2D.Float(x.toFloat() , y.toFloat() , w.toFloat() , h.toFloat() , arc_w.toFloat() ,
+			arc_h.toFloat()
+		)
 	}
 	
 	fun default_gdev():GraphicsDevice
 	{
-		return GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
+		return GraphicsEnvironment.getLocalGraphicsEnvironment().defaultScreenDevice
 	}
 	
 	fun default_gconf():GraphicsConfiguration
 	{
-		return default_gdev().getDefaultConfiguration()
+		return default_gdev().defaultConfiguration
 	}
 	
 	fun acc_mem():Int
 	{
-		return default_gdev().getAvailableAcceleratedMemory()
+		return default_gdev().availableAcceleratedMemory
 	}
 	
-	val componentTreeWithInfo:struct_Pair<JTree , Map<String , Component>>
+	val componentTreeWithInfo:stl_Struct.struct_Pair<JTree , Map<String , Component>>
 		get()
 		{
 			val rootNode=DefaultMutableTreeNode("Components")
-			val componentInfoMap:MutableMap<String , Component>=HashMap()
+			val componentInfoMap:MutableMap<String , Component> =HashMap()
 			for (window in Window.getWindows()) traverseComponentHierarchy(window , rootNode , componentInfoMap)
 			val componentTree=JTree(rootNode)
-			componentTree.setRootVisible(false)
-			return struct_Pair.make<JTree , Map<String , Component>>(componentTree , componentInfoMap)
+			componentTree.isRootVisible=false
+			return stl_Struct.struct_Pair.make(componentTree , componentInfoMap)
 		}
 	
 	private fun traverseComponentHierarchy(
@@ -65,7 +66,7 @@ object stl_SwingHelper
 	fun listComponents_OfContainer(c:Container):List<Component>
 	{
 		val comps=c.components
-		val compList:MutableList<Component>=ArrayList()
+		val compList:MutableList<Component> =ArrayList()
 		for (comp in comps)
 		{
 			compList.add(comp)
@@ -89,18 +90,13 @@ object stl_SwingHelper
 		val i:Insets
 		
 		constructor(radius:Int , thickness:Int , color:Color?):this(radius , thickness , color , null)
-		{
-		}
 		
 		init
 		{
-			i=if (myInsets==null) Insets(
-				Math.max(1 , strokeThickness-1) ,
-				Math.max(1 , strokeThickness-1) ,
-				Math.max(1 , strokeThickness-1) ,
-				Math.max(1 , strokeThickness-1)
+			i=myInsets ?: Insets(
+				1.coerceAtLeast(strokeThickness-1) , 1.coerceAtLeast(strokeThickness-1) ,
+				1.coerceAtLeast(strokeThickness-1) , 1.coerceAtLeast(strokeThickness-1)
 			)
-			else myInsets
 		}
 		
 		override fun paintBorder(c:Component , g:Graphics , x:Int , y:Int , width:Int , height:Int)
@@ -109,8 +105,8 @@ object stl_SwingHelper
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING , RenderingHints.VALUE_ANTIALIAS_ON)
 			g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL , RenderingHints.VALUE_STROKE_PURE)
 			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION , RenderingHints.VALUE_INTERPOLATION_BILINEAR)
-			g2.setStroke(BasicStroke(strokeThickness))
-			g2.setColor(color)
+			g2.stroke=BasicStroke(strokeThickness.toFloat())
+			g2.color=color
 			g2.drawRoundRect(x , y , width , height , radius , radius)
 			g2.dispose()
 		}

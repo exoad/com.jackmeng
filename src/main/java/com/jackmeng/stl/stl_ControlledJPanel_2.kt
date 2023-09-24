@@ -5,9 +5,7 @@ package com.jackmeng.stl
 
 import javax.swing.JPanel
 import java.awt.Graphics
-import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.Executors
-import java.lang.Runnable
 import java.util.concurrent.TimeUnit
 import javax.swing.SwingUtilities
 import java.util.ArrayList
@@ -16,10 +14,10 @@ import java.util.function.Consumer
 class stl_ControlledJPanel_2:JPanel()
 {
 	@Transient
-	private val drawingMethods:MutableList<Consumer<Graphics>>=ArrayList()
+	private val drawingMethods:MutableList<Consumer<Graphics>> =ArrayList()
 	
 	@Transient
-	private val fpsListeners:MutableList<Consumer<Float>>=ArrayList()
+	private val fpsListeners:MutableList<Consumer<Float>> =ArrayList()
 	private val startTime:Long
 	private var frameCount:Long=0
 	

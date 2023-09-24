@@ -76,7 +76,7 @@ interface stl_type<T>:Comparable<T>
 		 * The other type to be modded.
 		 * @return A new object instance that has the value of the final operation.
 		 */
-		operator fun mod(e:E):E
+		fun mod(e:E):E
 		
 		/**
 		 * Generic Bitwise Negation.

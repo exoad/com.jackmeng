@@ -3,22 +3,16 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
-import com.jackmeng.stl.stl_Int_Interval
-import com.jackmeng.stl.stl_IntervalTree.Interval_Node
 import java.util.ArrayList
 
 class stl_IntervalTree
 {
 	class Interval_Node(var interval:stl_Int_Interval)
 	{
-		var max:Int
+		var max:Int=interval.high
 		var left:Interval_Node?=null
 		var right:Interval_Node?=null
 		
-		init
-		{
-			max=interval.high
-		}
 	}
 	
 	private var root:Interval_Node?=null
@@ -38,7 +32,7 @@ class stl_IntervalTree
 	
 	fun search(point:Int):List<stl_Int_Interval>
 	{
-		val results:MutableList<stl_Int_Interval>=ArrayList()
+		val results:MutableList<stl_Int_Interval> =ArrayList()
 		search(root , point , results)
 		return results
 	}

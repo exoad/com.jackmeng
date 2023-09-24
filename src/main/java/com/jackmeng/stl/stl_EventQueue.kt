@@ -9,12 +9,11 @@ import kotlin.jvm.Synchronized
 
 class stl_EventQueue:Runnable
 {
-	private val eventQueue:LinkedList<Runnable>
+	private val eventQueue:LinkedList<Runnable>=LinkedList()
 	private var isProcessingEvents:Boolean
 	
 	init
 	{
-		eventQueue=LinkedList()
 		isProcessingEvents=false
 	}
 	

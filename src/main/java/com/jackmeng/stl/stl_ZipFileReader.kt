@@ -16,12 +16,15 @@ class stl_ZipFileReader(inputStream:InputStream?)
 	init
 	{
 		cache=HashMap()
-		ZipInputStream(inputStream).use { zipInputStream->
-			var entry:ZipEntry
-			while (zipInputStream.nextEntry.also { entry=it }!=null)
-			{
-				val content=zipInputStream.readAllBytes()
-				cache[entry.name]=content
+		if (inputStream!=null)
+		{
+			ZipInputStream(inputStream).use { zipInputStream->
+				var entry:ZipEntry
+				while (zipInputStream.nextEntry.also { entry=it }!=null)
+				{
+					val content=zipInputStream.readAllBytes()
+					cache[entry.name]=content
+				}
 			}
 		}
 	}

@@ -4,7 +4,6 @@
 package com.jackmeng.stl
 
 import java.util.BitSet
-import com.jackmeng.stl.stl_HashFunction
 
 class stl_BloomFilterDS(size:Int , hashes:Int)
 {

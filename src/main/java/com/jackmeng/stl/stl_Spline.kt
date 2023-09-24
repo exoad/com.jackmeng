@@ -5,12 +5,11 @@ package com.jackmeng.stl
 
 class stl_Spline(private val x:List<Double> , private val y:List<Double>)
 {
-	private val n:Int
+	private val n:Int=x.size
 	private val z:DoubleArray
 	
 	init
 	{
-		n=x.size
 		val h=DoubleArray(n)
 		val b=DoubleArray(n)
 		val u=DoubleArray(n)

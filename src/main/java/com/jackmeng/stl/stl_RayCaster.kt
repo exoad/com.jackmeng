@@ -3,6 +3,9 @@
 // license that can be found in the LICENSE file.
 package com.jackmeng.stl
 
+import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.sin
 import java.awt.image.BufferedImage
 import java.awt.Color
 
@@ -24,8 +27,8 @@ class stl_RayCaster(
 			while (!hitWall&&distanceToWall<map.size)
 			{
 				distanceToWall+=0.1
-				val testX=(rayPos[0]+Math.sin(rayAngle)*distanceToWall).toInt()
-				val testY=(rayPos[1]+Math.cos(rayAngle)*distanceToWall).toInt()
+				val testX=(rayPos[0]+sin(rayAngle)*distanceToWall).toInt()
+				val testY=(rayPos[1]+cos(rayAngle)*distanceToWall).toInt()
 				if (testX<0||testX>=map[0].size||testY<0||testY>=map.size)
 				{
 					hitWall=true
@@ -70,8 +73,8 @@ class stl_RayCaster(
 				var sideDistX:Double
 				var sideDistY:Double
 				val integral_Dist_X=0.1f
-				val deltaDistX=Math.abs(integral_Dist_X/rayDirX)
-				val deltaDistY=Math.abs(1/rayDirY)
+				val deltaDistX=abs(integral_Dist_X/rayDirX)
+				val deltaDistY=abs(1/rayDirY)
 				var perpWallDist:Double
 				var stepX:Int
 				var stepY:Int
