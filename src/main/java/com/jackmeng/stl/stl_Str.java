@@ -1,66 +1,63 @@
 // Copyright 2023 Jack Meng. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
+package com.jackmeng.stl
 
-package com.jackmeng.stl;
+import java.lang.StringBuilder
+import java.util.Locale
 
-import java.util.Map;
-
-public final class stl_Str
+object stl_Str
 {
-    private stl_Str()
-    {
-    }
-
-    public static String from_char_arr(char[] e)
-    {
-        StringBuilder sb = new StringBuilder();
-        for (char x : e)
-            sb.append(x);
-        return sb.toString();
-    }
-
-    public static String n_copies(int n, String sequence)
-    {
-        StringBuilder sb = new StringBuilder();
-        while (n-- > 0)
-            sb.append(sequence);
-        return sb.toString();
-    }
-
-    public static boolean is_empty(CharSequence e)
-    {
-        if (e == null || e.length() == 0 || e.isEmpty())
-            return true;
-        if (e instanceof String && ((String) e).isBlank())
-            return true;
-        assert e instanceof String;
-        return ((String) e).matches("\\s+");
-    }
-
-    public static String interpolate0(String keyStart, String keyEnd, String template, String... payloads)
-    {
-        for (int i = 0; i < payloads.length; i += 2)
-            template = template.replace(keyStart + payloads[i] + keyEnd, payloads[i + 1]);
-        return template;
-    }
-
-    public static String interpolate1_1(String keyStart, String keyEnd, String template, Map< String, String > vars)
-    {
-        for (Map.Entry< String, String > e : vars.entrySet())
-            template = template.replace(keyStart + e.getKey() + keyEnd, e.getValue());
-        return template;
-    }
-
-    public static String interpolate2(String keyStart, String keyEnd, String template, String... payloads)
-    {
-        for (int i = 0; i < payloads.length; i++)
-            template = template.replace(keyStart + i + keyEnd, payloads[i]);
-        return template;
-    }
-
-    public static String interpolate3(String keyStart, String keyEnd, String template, String[][] payloads)
-    /*
+	fun from_char_arr(e:CharArray):String
+	{
+		val sb=StringBuilder()
+		for (x in e) sb.append(x)
+		return sb.toString()
+	}
+	
+	fun n_copies(n:Int , sequence:String?):String
+	{
+		var n=n
+		val sb=StringBuilder()
+		while (n-->0) sb.append(sequence)
+		return sb.toString()
+	}
+	
+	fun is_empty(e:CharSequence?):Boolean
+	{
+		if (e==null||e.length==0||e.isEmpty()) return true
+		if (e is String&&e.isBlank()) return true
+		assert(e is String)
+		return (e as String).matches("\\s+")
+	}
+	
+	fun interpolate0(keyStart:String , keyEnd:String , template:String , vararg payloads:String):String
+	{
+		var template=template
+		var i=0
+		while (i<payloads.size)
+		{
+			template=template.replace(keyStart+payloads[i]+keyEnd , payloads[i+1])
+			i+=2
+		}
+		return template
+	}
+	
+	fun interpolate1_1(keyStart:String , keyEnd:String , template:String , vars:Map<String , String?>):String
+	{
+		var template=template
+		for ((key , value) in vars) template=template.replace(keyStart+key+keyEnd , value!!)
+		return template
+	}
+	
+	fun interpolate2(keyStart:String , keyEnd:String , template:String , vararg payloads:String?):String
+	{
+		var template=template
+		for (i in payloads.indices) template=template.replace(keyStart+i+keyEnd , payloads[i]!!)
+		return template
+	}
+	
+	fun interpolate3(keyStart:String , keyEnd:String , template:String , payloads:Array<Array<String>>):String /*
      * Payload formatting:
      * {
      * {
@@ -69,88 +66,89 @@ public final class stl_Str
      * }
      * }
      */
-    {
-        for (String[] a : payloads)
-            template = template.replace(keyStart + a[0] + keyEnd, a[1]);
-        return template;
-    }
-
-    public static int instances(String payload, String toFind)
-    {
-        int last = 0, i = 0;
-        while ((last = payload.indexOf(toFind, last)) != -1)
-        {
-            i++;
-            last += toFind.length() - 1;
-        }
-        return i;
-    }
-
-    public static boolean is_one_type_commaed(String input)
-    {
-        String[] parts = input.split(",");
-        Class< ? > clazz = null;
-        boolean isValid = true;
-        for (String part : parts)
-        {
-            if (part.isEmpty())
-            {
-                isValid = false;
-                break;
-            }
-            Object obj = (part.length() == 1) ? part.charAt(0) : part;
-            if (clazz == null)
-            {
-                clazz = obj.getClass();
-            }
-            else
-            {
-                if (!obj.getClass().equals(clazz))
-                {
-                    isValid = false;
-                    break;
-                }
-            }
-        }
-        return isValid;
-    }
-
-    public static boolean parse_bool(String content)
-    {
-        content = content.toLowerCase();
-        return content.equals("1") || content.equals("on") || content.equals("true") || content.equals("positive")
-                || content.equals("in");
-    }
-
-    public static String insert_nl(String input, int maxChars, String optionalPad)
-    {
-        String pad = optionalPad == null ? "\n" : optionalPad;
-        StringBuilder sb = new StringBuilder();
-        String[] w = input.split(" ");
-        int i = 0;
-        for (String r : w)
-        {
-            if (i + r.length() > maxChars)
-            {
-                sb.append(pad);
-                i = 0;
-            }
-            if (r.length() > maxChars)
-            {
-                int j = 0;
-                while (j < r.length())
-                {
-                    sb.append(j + maxChars < r.length() ? r.substring(j, j + maxChars) : r.substring(j));
-                    j += maxChars;
-                    sb.append(pad);
-                }
-            }
-            else
-            {
-                sb.append(r).append(" ");
-                i += r.length() + 1;
-            }
-        }
-        return sb.toString().trim();
-    }
+	{
+		var template=template
+		for (a in payloads) template=template.replace(keyStart+a[0]+keyEnd , a[1])
+		return template
+	}
+	
+	fun instances(payload:String , toFind:String):Int
+	{
+		var last=0
+		var i=0
+		while (payload.indexOf(toFind , last).also { last=it }!=-1)
+		{
+			i++
+			last+=toFind.length-1
+		}
+		return i
+	}
+	
+	fun is_one_type_commaed(input:String):Boolean
+	{
+		val parts=input.split(",".toRegex()).toTypedArray()
+		var clazz:Class<*>?=null
+		var isValid=true
+		for (part in parts)
+		{
+			if (part.isEmpty())
+			{
+				isValid=false
+				break
+			}
+			val obj:Any=if (part.length==1) part[0] else part
+			if (clazz==null)
+			{
+				clazz=obj.javaClass
+			}
+			else
+			{
+				if (obj.javaClass!=clazz)
+				{
+					isValid=false
+					break
+				}
+			}
+		}
+		return isValid
+	}
+	
+	fun parse_bool(content:String):Boolean
+	{
+		var content=content
+		content=content.lowercase(Locale.getDefault())
+		return content=="1"||content=="on"||content=="true"||content=="positive"||content=="in"
+	}
+	
+	fun insert_nl(input:String , maxChars:Int , optionalPad:String?):String
+	{
+		val pad=optionalPad ?: "\n"
+		val sb=StringBuilder()
+		val w=input.split(" ".toRegex()).toTypedArray()
+		var i=0
+		for (r in w)
+		{
+			if (i+r.length>maxChars)
+			{
+				sb.append(pad)
+				i=0
+			}
+			if (r.length>maxChars)
+			{
+				var j=0
+				while (j<r.length)
+				{
+					sb.append(if (j+maxChars<r.length) r.substring(j , j+maxChars) else r.substring(j))
+					j+=maxChars
+					sb.append(pad)
+				}
+			}
+			else
+			{
+				sb.append(r).append(" ")
+				i+=r.length+1
+			}
+		}
+		return sb.toString().trim { it<=' ' }
+	}
 }

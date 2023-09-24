@@ -1,113 +1,130 @@
 // Copyright 2023 Jack Meng. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
+package com.jackmeng.stl
 
-package com.jackmeng.stl;
+import com.jackmeng.stl.stl_ListenerPool
+import com.jackmeng.stl.stl_Listener
+import com.jackmeng.stl.stl_Struct.struct_Pair
+import com.jackmeng.stl.stl_ListenerPool.ListenerPool_Attached.Attached_States
+import kotlin.jvm.Synchronized
+import com.jackmeng.stl.stl_Struct
+import java.util.*
+import java.util.function.Consumer
 
-import java.util.*;
-
-public class stl_ListenerPool<T>
+open class stl_ListenerPool<T>(private var name:String)
 {
-    public static class ListenerPool_Attached<T> extends stl_ListenerPool<T>
-    {
-        public enum Attached_States
-        {
-            ATTACHED, ADD_LISTENER, DETACHED, RMF_LISTENER;
-        }
-
-        private final List<stl_Listener<stl_Struct.struct_Pair<stl_Listener<T>, Attached_States>>> attachedListeners;
-        public ListenerPool_Attached(String poolName) {
-            super(poolName);
-            attachedListeners = new Vector<>(2);
-        }
-
-        public synchronized void attach(stl_Listener<stl_Struct.struct_Pair<stl_Listener<T>, Attached_States>> listener)
-        {
-            attachedListeners.add(listener);
-            listener.call(stl_Struct.make_pair(null, Attached_States.ATTACHED));
-        }
-
-        public synchronized void detach(stl_Listener<stl_Struct.struct_Pair<stl_Listener<T>, Attached_States>> listener)
-        {
-            if(attachedListeners.contains(listener))
-            {
-                attachedListeners.remove(listener);
-                listener.call(stl_Struct.make_pair(null, Attached_States.DETACHED));
-            }
-        }
-
-        @Override
-        public synchronized void add(stl_Listener<T> listener)
-        {
-            super.add(listener);
-            dispatch(stl_Struct.make_pair(listener, Attached_States.ADD_LISTENER));
-        }
-
-        @Override
-        public synchronized void rmf(stl_Listener<T> listener)
-        {
-            super.rmf(listener);
-            dispatch(stl_Struct.make_pair(listener, Attached_States.RMF_LISTENER));
-        }
-
-        private void dispatch(stl_Struct.struct_Pair<stl_Listener<T>, Attached_States> payload)
-        {
-            attachedListeners.forEach(x -> x.call(payload));
-        }
-
-        @Override
-        public synchronized void kill()
-        {
-            super.kill();
-            attachedListeners.clear();
-        }
-    }
-
-    private String name;
-    private final List<stl_Listener<T>> listeners;
-
-    public stl_ListenerPool(String poolName)
-    {
-        this.name = poolName;
-        listeners = new Vector<>(5);
-    }
-
-    public String name()
-    {
-        return name;
-    }
-
-    public void name(String name)
-    {
-        this.name = name;
-    }
-
-    public synchronized void add(stl_Listener<T> listener)
-    {
-        listeners.add(listener);
-    }
-
-    public synchronized void rmf(stl_Listener<T> listener)
-    {
-        listeners.remove(listener);
-    }
-
-    public synchronized void kill()
-    {
-        listeners.clear();
-    }
-
-    /**
-     * It is highly suggested that you make sure that the payload is not null!
-     * @param payload The action to dispatch to all the listeners
-     */
-    public void dispatch(T payload)
-    {
-        listeners.forEach(x -> x.call(payload));
-    }
-
-    @Override public String toString()
-    {
-        return name + "\n" + listeners;
-    }
+	class ListenerPool_Attached<T>(poolName:String):stl_ListenerPool<T>(poolName)
+	{
+		enum class Attached_States
+		{
+			ATTACHED , ADD_LISTENER , DETACHED , RMF_LISTENER
+		}
+		
+		private val attachedListeners:MutableList<stl_Listener<struct_Pair<stl_Listener<T> , Attached_States>?>>
+		
+		init
+		{
+			attachedListeners=Vector(2)
+		}
+		
+		@Synchronized
+		fun attach(listener:stl_Listener<struct_Pair<stl_Listener<T> , Attached_States>?>)
+		{
+			attachedListeners.add(listener)
+			listener.call(stl_Struct.make_pair(null , Attached_States.ATTACHED))
+		}
+		
+		@Synchronized
+		fun detach(listener:stl_Listener<struct_Pair<stl_Listener<T> , Attached_States>?>)
+		{
+			if (attachedListeners.contains(listener))
+			{
+				attachedListeners.remove(listener)
+				listener.call(stl_Struct.make_pair(null , Attached_States.DETACHED))
+			}
+		}
+		
+		@Synchronized
+		override fun add(listener:stl_Listener<T>)
+		{
+			super.add(listener)
+			dispatch(stl_Struct.make_pair(listener , Attached_States.ADD_LISTENER))
+		}
+		
+		@Synchronized
+		override fun rmf(listener:stl_Listener<T>)
+		{
+			super.rmf(listener)
+			dispatch(stl_Struct.make_pair(listener , Attached_States.RMF_LISTENER))
+		}
+		
+		private fun dispatch(payload:struct_Pair<stl_Listener<T> , Attached_States>)
+		{
+			attachedListeners.forEach(Consumer { x:stl_Listener<struct_Pair<stl_Listener<T> , Attached_States>?>->
+				x.call(
+					payload
+				)
+			})
+		}
+		
+		@Synchronized
+		override fun kill()
+		{
+			super.kill()
+			attachedListeners.clear()
+		}
+	}
+	
+	private val listeners:MutableList<stl_Listener<T?>>
+	
+	init
+	{
+		listeners=Vector(5)
+	}
+	
+	fun name():String
+	{
+		return name
+	}
+	
+	fun name(name:String)
+	{
+		this.name=name
+	}
+	
+	@Synchronized
+	open fun add(listener:stl_Listener<T?>)
+	{
+		listeners.add(listener)
+	}
+	
+	@Synchronized
+	open fun rmf(listener:stl_Listener<T?>)
+	{
+		listeners.remove(listener)
+	}
+	
+	@Synchronized
+	open fun kill()
+	{
+		listeners.clear()
+	}
+	
+	/**
+	 * It is highly suggested that you make sure that the payload is not null!
+	 * @param payload The action to dispatch to all the listeners
+	 */
+	fun dispatch(payload:T)
+	{
+		listeners.forEach(Consumer { x:stl_Listener<T?>-> x.call(payload) })
+	}
+	
+	override fun toString():String
+	{
+		return """
+	    	$name
+	    	$listeners
+	    	""".trimIndent()
+	}
 }
